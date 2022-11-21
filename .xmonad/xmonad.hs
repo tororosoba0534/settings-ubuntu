@@ -244,8 +244,9 @@ myLogHook = return ()
 --
 -- By default, do nothing.
 myStartupHook = do
-	spawnOnce "nitrogen --restore &"
-	spawnOnce "compton &"
+  spawnOnce "nitrogen --restore &"
+  spawnOnce "compton &"
+  spawnOnce "autokey-qt &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
