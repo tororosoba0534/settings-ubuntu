@@ -249,7 +249,8 @@ myStartupHook = do
   spawnOnce "nitrogen --restore &"
   spawnOnce "compton &"
   spawnOnce "code ~/settings-ubuntu/ &"
-  spawnOnce "autokey -c &"
+  spawnOnce "autokey &"
+  
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
