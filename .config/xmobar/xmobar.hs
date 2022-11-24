@@ -17,15 +17,8 @@ Config { font = "xft:Ubuntu Mono:pixelsize=20:antialias=true:hinting=true"
        , iconRoot = "."
        , allDesktops = True
        , overrideRedirect = True
-       , commands = [ Run Weather "EGPF" ["-t","<station>: <tempC>C",
-                                          "-L","18","-H","25",
-                                          "--normal","green",
-                                          "--high","red",
-                                          "--low","lightblue"] 36000
-                    , Run Network "eth0" ["-L","0","-H","32",
-                                          "--normal","green","--high","red"] 10
-                    , Run Network "eth1" ["-L","0","-H","32",
-                                          "--normal","green","--high","red"] 10
+       , commands = [ Run Wireless "wlp3s0" [ "-t", "<essid>" ] 10
+                    , Run DynNetwork [ "--template", "<dev>: <tx>KB <rx>KB"] 10
                     , Run Cpu ["-L","3","-H","50",
                                "--normal","green","--high","red"] 10
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
@@ -35,6 +28,6 @@ Config { font = "xft:Ubuntu Mono:pixelsize=20:antialias=true:hinting=true"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%cpu% | %memory% * %swap% | %eth0% - %eth1% }\
-                    \{ <fc=#ee9a00>%date%</fc>| %EGPF% | %uname%"
+       , template = "%cpu% | %memory% * %swap% | %wlp3s0wi% | %dynnetwork% }\
+                    \{ <fc=#ee9a00>%date%</fc> | %uname%"
        }
