@@ -1,5 +1,7 @@
 Config { font = "xft:Ubuntu Mono:pixelsize=20:antialias=true:hinting=true"
-       , additionalFonts = []
+       , additionalFonts = [ "xft:Mononoki Nerd Font:pixelsize=11:antialias=true:hinting=true"
+              , "xft:FontAwesome:pixelsize=13"
+       ]
        , borderColor = "black"
        , border = TopB
        , bgColor = "black"
@@ -10,7 +12,7 @@ Config { font = "xft:Ubuntu Mono:pixelsize=20:antialias=true:hinting=true"
        , iconOffset = -1
        , lowerOnStart = True
        , pickBroadest = False
-       , persistent = False
+       , persistent = True
        , hideOnStart = False
        , iconRoot = "."
        , allDesktops = True
