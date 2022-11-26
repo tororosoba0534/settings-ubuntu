@@ -11,8 +11,12 @@ import XMonad
 import Data.Monoid
 import System.Exit
 import XMonad.Actions.WindowGo
+import XMonad.Actions.Minimize
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
+import XMonad.Layout.Minimize
+import qualified XMonad.Layout.BoringWindows as BW
+import XMonad.Util.NamedScratchpad
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import qualified XMonad.StackSet as W
@@ -67,7 +71,11 @@ myFocusedBorderColor = "#ff0000"
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch a terminal
-    [ ((modm, xK_t), runOrRaise myTerminal (className =? myTerminalClass))
+    [ 
+      -- ((modm, xK_t), runOrRaise myTerminal (className =? myTerminalClass))
+
+      ((modm, xK_t), namedScratchpadAction myScratchPads "terminal")
+
     , ((modm, xK_b), spawn myBrowser)
 
     -- launch dmenu
@@ -189,7 +197,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
+myLayout =  avoidStruts $ minimize $ BW.boringWindows (tiled ||| Mirror tiled ||| Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -224,6 +232,7 @@ myManageHook = composeAll
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
+    <+> namedScratchpadManageHook myScratchPads
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -257,7 +266,26 @@ myStartupHook = do
   spawnOnce "compton &"
   spawnOnce "code ~/settings-ubuntu/ &"
   spawnOnce "autokey &"
-  
+
+
+
+--------------------------------------------------------
+--
+-- Named Scratchpad
+myScratchPads = [
+  NS "terminal" spawnTerm findTerm manageTerm
+  ] 
+  where
+    spawnTerm = myTerminal
+    findTerm = className =? myTerminalClass
+    manageTerm = doFullFloat
+    -- manageTerm = customFloating $ W.RationalRect l t w h
+    --   where
+    --     h = 0.9
+    --     w = 0.9
+    --     t = 0.95 - h
+    --     l = 0.95 - w
+
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
