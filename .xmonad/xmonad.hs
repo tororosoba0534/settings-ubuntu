@@ -10,6 +10,7 @@
 import XMonad
 import Data.Monoid
 import System.Exit
+import XMonad.Actions.WindowGo
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Util.SpawnOnce
@@ -66,7 +67,7 @@ myFocusedBorderColor = "#ff0000"
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch a terminal
-    [ ((modm, xK_t), spawn $ XMonad.terminal conf)
+    [ ((modm, xK_t), runOrRaise myTerminal (className =? myTerminalClass))
     , ((modm, xK_b), spawn myBrowser)
 
     -- launch dmenu

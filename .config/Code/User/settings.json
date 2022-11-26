@@ -1,6 +1,9 @@
 {
     "workbench.colorTheme": "Default Dark+",
     "haskell.manageHLS": "GHCup",
+    "haskell.serverEnvironment": {
+        "PATH": "${HOME}/.ghcup/bin:$PATH"
+    },
     "security.workspace.trust.untrustedFiles": "open",
     "git.confirmSync": false,
     "window.zoomLevel": 1
