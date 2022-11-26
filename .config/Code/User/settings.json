@@ -1,0 +1,7 @@
+{
+    "workbench.colorTheme": "Default Dark+",
+    "haskell.manageHLS": "GHCup",
+    "security.workspace.trust.untrustedFiles": "open",
+    "git.confirmSync": false,
+    "window.zoomLevel": 1
+}
