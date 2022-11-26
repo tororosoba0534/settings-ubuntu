@@ -128,7 +128,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm,               xK_t     ), withFocused $ windows . W.sink)
 
     -- Increment the number of windows in the master area
-    , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
+    , ((modm              , xK_comma ), namedScratchpadAction myScratchPads "settings")
 
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
@@ -275,6 +275,7 @@ myStartupHook = do
 -- Named Scratchpad
 myScratchPads = [
   NS "terminal" spawnTerm findTerm manageTerm
+  , NS "settings" "code ~/settings-ubuntu" (className =? "Code") nonFloating
   ] 
   where
     spawnTerm = myTerminal
