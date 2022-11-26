@@ -12,6 +12,7 @@ import Data.Monoid
 import System.Exit
 import XMonad.Actions.WindowGo
 import XMonad.Actions.Minimize
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Minimize
@@ -278,10 +279,16 @@ myScratchPads = [
   where
     spawnTerm = myTerminal
     findTerm = className =? myTerminalClass
-    manageTerm = doFullFloat
+    -- manageTerm = doFullFloat
+    manageTerm = doRectFloat $ W.RationalRect x y w h
+      where
+        x = 0
+        y = 0.02
+        w = 1
+        h = 0.98
     -- manageTerm = customFloating $ W.RationalRect l t w h
     --   where
-    --     h = 0.9
+    --     h = 0.5
     --     w = 0.9
     --     t = 0.95 - h
     --     l = 0.95 - w
@@ -294,7 +301,7 @@ myScratchPads = [
 --
 main = do
   xmproc <- spawnPipe "xmobar -x 0 ~/.config/xmobar/xmobar.hs"
-  xmonad $ docks defaults
+  xmonad . docks $ ewmh defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
