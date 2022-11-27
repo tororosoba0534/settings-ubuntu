@@ -12,6 +12,7 @@ import Data.Monoid
 import System.Exit
 import XMonad.Actions.WindowGo
 import XMonad.Actions.Minimize
+import XMonad.Actions.CycleWS
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
@@ -118,11 +119,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Swap the focused window with the previous window
     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
 
-    -- Shrink the master area
-    , ((modm,               xK_h     ), sendMessage Shrink)
+    , ((modm,               xK_h     ), prevWS)
 
-    -- Expand the master area
-    , ((modm,               xK_l     ), sendMessage Expand)
+    , ((modm,               xK_l     ), nextWS)
 
     -- -- Push window back into tiling
     -- , ((modm,               xK_t     ), withFocused $ windows . W.sink)
