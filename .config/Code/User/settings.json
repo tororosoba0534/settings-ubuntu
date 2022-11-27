@@ -7,5 +7,6 @@
     "security.workspace.trust.untrustedFiles": "open",
     "git.confirmSync": false,
     "window.zoomLevel": 1,
-    "editor.wordWrap": "on"
+    "editor.wordWrap": "on",
+    "git.suggestSmartCommit": false
 }
