@@ -150,3 +150,7 @@ else
 	tmux ls
 	echo "Please run 'tmux attach' command."
 fi
+
+#
+# Custom commands
+alias ides='cd ~/settings-ubuntu; tmux split-window -h -p 30 -d; nvim .'
