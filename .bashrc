@@ -129,8 +129,11 @@ tmux_count=$(ps aux | grep tmux | grep -v grep | wc -l)
 tmux_window_name_settings="settings"
 if test $tmux_count -eq 0; then
 	tmux new -s init-session -n $tmux_window_name_settings
-else
-	tmux attach
+# else
+#	# # If you attach existing tmux session here, dangerous infinite loop occures.
+#	# # DO NOT tmux attach automatically.
+#	# tmux attach
+# 	tmux ls
 fi
 
 if [ -n "$TMUX" ]; then
@@ -143,5 +146,7 @@ if [ -n "$TMUX" ]; then
 		fi
 	fi
 else 
-	echo "OUTSIDE"
+	echo "Here is OUTSIDE of tmux session."
+	tmux ls
+	echo "Please run 'tmux attach' command."
 fi

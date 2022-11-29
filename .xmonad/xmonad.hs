@@ -126,8 +126,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- -- Push window back into tiling
     -- , ((modm,               xK_t     ), withFocused $ windows . W.sink)
 
-    -- Increment the number of windows in the master area
-    , ((modm              , xK_comma ), namedScratchpadAction myScratchPads "settings")
+    -- -- Increment the number of windows in the master area
+    -- , ((modm              , xK_comma ), namedScratchpadAction myScratchPads "settings")
 
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
@@ -264,7 +264,7 @@ myLogHook = return ()
 myStartupHook = do
   spawnOnce "nitrogen --restore &"
   spawnOnce "compton &"
-  spawnOnce "code ~/settings-ubuntu/ &"
+  -- spawnOnce "code ~/settings-ubuntu/ &"
   spawnOnce "autokey &"
 
 

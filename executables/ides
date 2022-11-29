@@ -1,8 +1,11 @@
 #!/bin/sh
 #
 # IDE-for-Settings
-cd ~/settings-ubuntu
-tmux split-window -v -d
-tmux split-window -h -d
-tmux resize-pane -x 150 -y 40
+
+# cd ~/settings-ubuntu
+# tmux split-window -v -d
+# tmux split-window -h -d
+# tmux resize-pane -x 150 -y 40
+# nvim ~/settings-ubuntu/
+
 nvim ~/settings-ubuntu/
