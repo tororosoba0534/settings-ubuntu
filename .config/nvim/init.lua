@@ -4,6 +4,7 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.local/share/nvim')
 
 Plug 'vimwiki/vimwiki'
+Plug 'airblade/vim-gitgutter'
 
 vim.call('plug#end')
 
