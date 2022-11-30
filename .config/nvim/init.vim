@@ -22,3 +22,6 @@ function! ToggleGStatus()
 endfunction
 nnoremap <A-g> :call ToggleGStatus()<CR>
 command! Sv :source $MYVIMRC
+command! St :!tmux source-file ~/settings-ubuntu/.tmux.conf
+
+
