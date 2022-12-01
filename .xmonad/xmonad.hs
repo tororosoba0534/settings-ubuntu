@@ -17,6 +17,7 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Minimize
+import XMonad.Layout.MultiColumns
 import qualified XMonad.Layout.BoringWindows as BW
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.SpawnOnce
@@ -78,7 +79,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
       ((modm, xK_space), namedScratchpadAction myScratchPads "terminal")
 
-    , ((modm, xK_b), spawn myBrowser)
+    , ((modm, xK_b), allNamedScratchpadAction myScratchPads "browser")
 
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "dmenu_run")
@@ -90,7 +91,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_c     ), kill)
 
      -- Rotate through the available layout algorithms
-    , ((modm .|. shiftMask,               xK_space ), sendMessage NextLayout)
+    , ((modm ,               xK_w ), sendMessage NextLayout)
 
     -- --  Reset the layouts on the current workspace to default
     -- , ((modm .|. shiftMask, xK_r ), setLayout $ XMonad.layoutHook conf)
@@ -127,7 +128,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm,               xK_t     ), withFocused $ windows . W.sink)
 
     -- -- Increment the number of windows in the master area
-    -- , ((modm              , xK_comma ), namedScratchpadAction myScratchPads "settings")
+    , ((modm              , xK_comma ), namedScratchpadAction myScratchPads "autokey")
 
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
@@ -156,15 +157,15 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [((m .|. modm, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-    ++
+    -- ++
 
-    --
-    -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
-    -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
-    --
-    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    -- --
+    -- -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
+    -- -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
+    -- --
+    -- [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+    --     | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
+    --     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 
 ------------------------------------------------------------------------
@@ -197,7 +198,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout =  avoidStruts (tiled ||| Mirror tiled ||| Full)
+myLayout =  avoidStruts (tiled ||| multiCol [1] 1 0.01 (-0.5) ||| Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -275,6 +276,8 @@ myStartupHook = do
 myScratchPads = [
   NS "terminal" spawnTerm findTerm manageTerm
   , NS "settings" "code ~/settings-ubuntu" (className =? "Code") nonFloating
+  , NS "autokey" "autokey -c" (className =? "autokey") nonFloating
+  , NS "browser" "google-chrome" (className =? "Google-chrome") nonFloating
   ] 
   where
     spawnTerm = myTerminal

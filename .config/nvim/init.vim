@@ -43,4 +43,10 @@ nnoremap <A-k> :wincmd W<CR>
 nnoremap <A-h> :tabnext<CR>
 nnoremap <A-l> :tabprevious<CR>
 
+" Enable multi-cursor behaviour in visual mode with <C-c>.
+" If you want to interrupt vim sequence and invalidate crashed vim script, use
+" <ESC>.
+inoremap <C-c> <ESC>---
+inoremap <ESC> <C-c>---
+
 
