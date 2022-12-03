@@ -3,6 +3,8 @@ call plug#begin()
 Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-fugitive'
 Plug 'mbbill/undotree'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*'}
 call plug#end()
 
 
@@ -32,6 +34,12 @@ nnoremap <A-g> :call ToggleGStatus()<CR>
 let g:undotree_SetFocusWhenToggle = 1
 nnoremap <A-u> :UndotreeToggle<CR>
 
+"
+" bufferline.nvim config
+lua << EOF
+require("bufferline").setup{}
+EOF
+
 command! Sv :source $MYVIMRC
 command! St :!tmux source-file ~/settings-ubuntu/.tmux.conf
 
@@ -40,8 +48,8 @@ nnoremap <A--> :below split .<CR>
 nnoremap <A-t> :tabnew .<CR>
 nnoremap <A-j> :wincmd w<CR>
 nnoremap <A-k> :wincmd W<CR>
-nnoremap <A-h> :tabnext<CR>
-nnoremap <A-l> :tabprevious<CR>
+nnoremap <A-h> :bprev<CR>
+nnoremap <A-l> :bnext<CR>
 
 " Enable multi-cursor behaviour in visual mode with <C-c>.
 " If you want to interrupt vim sequence and invalidate crashed vim script, use
