@@ -18,6 +18,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Minimize
 import XMonad.Layout.MultiColumns
+-- import XMonad.Layout.ResizableThreeColumns
 import qualified XMonad.Layout.BoringWindows as BW
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.SpawnOnce
@@ -267,6 +268,7 @@ myStartupHook = do
   spawnOnce "compton &"
   -- spawnOnce "code ~/settings-ubuntu/ &"
   spawnOnce "autokey &"
+  spawnOnce "xmodmap ~/.Xmodmap"
 
 
 
