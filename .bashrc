@@ -122,6 +122,12 @@ fi
 PATH="$PATH":${HOME}/.local/bin
 PATH="$PATH":${HOME}/settings-ubuntu/executables
 
+# Invalidate ctrl-s and ctrl-q
+if [[ -t 0 ]]; then
+	stty stop undef
+	stty start undef
+fi
+
 
 # 
 # Autostart tmux
