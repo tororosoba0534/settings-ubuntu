@@ -118,6 +118,9 @@ fi
 
 [ -f "${HOME}/.ghcup/env" ] && source "${HOME}/.ghcup/env" # ghcup-env
 
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+
 
 PATH="$PATH":${HOME}/.local/bin
 PATH="$PATH":${HOME}/settings-ubuntu/executables
@@ -176,3 +179,4 @@ function man() {
 #
 # Custom commands
 alias ides='cd ~/settings-ubuntu; nvim .'
+alias idep='cd ~/Documents/practice; nvim .'

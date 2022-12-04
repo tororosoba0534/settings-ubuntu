@@ -2,6 +2,7 @@ source ~/.local/share/nvim/site/autoload/plug.vim
 call plug#begin()
 Plug 'vimwiki/vimwiki'
 Plug 'lervag/vimtex'
+Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-fugitive'
 Plug 'mbbill/undotree'
 Plug 'nvim-tree/nvim-web-devicons'
@@ -10,7 +11,18 @@ call plug#end()
 
 filetype plugin indent on
 syntax enable
+let g:python3_host_prog = system('echo -n $(which python3)')
 let g:vimtex_view_method = 'zathura'
+
+" This code should go in your vimrc or init.vim
+let g:UltiSnipsExpandTrigger       = '<Tab>'    " use Tab to expand snippets
+let g:UltiSnipsJumpForwardTrigger  = '<Tab>'    " use Tab to move forward through tabstops
+let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'  " use Shift-Tab to move backward through tabstops
+let g:UltiSnipsSnippetDirectoried=[$HOME.'/.config/nvim/UltiSnips']
+
+
+
+
 
 
 
