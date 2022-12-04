@@ -51,6 +51,8 @@ command! Sv :source $MYVIMRC
 command! St :!tmux source-file ~/settings-ubuntu/.tmux.conf
 command! Sb :!source ~/.bashrc
 
+cnoremap man vertical Man<SPACE>
+
 nnoremap <A-/> :below vsplit .<CR>
 nnoremap <A--> :below split .<CR>
 nnoremap <A-t> :tabnew .<CR>
