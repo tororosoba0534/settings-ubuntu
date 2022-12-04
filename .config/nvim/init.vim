@@ -3,6 +3,7 @@ call plug#begin()
 Plug 'vimwiki/vimwiki'
 Plug 'lervag/vimtex'
 Plug 'SirVer/ultisnips'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
 Plug 'mbbill/undotree'
 Plug 'nvim-tree/nvim-web-devicons'
