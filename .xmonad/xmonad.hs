@@ -146,6 +146,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
 
+    , (( modm .|. shiftMask, xK_z), spawn "xscreensaver-command -lock")
+    , (( 0, 0x1008FF12), spawn "amixer -D pulse sset Master 0%")
+    , (( 0, 0x1008FF11), spawn "amixer -D pulse sset Master 2%-")
+    , (( 0, 0x1008FF13), spawn "amixer -D pulse sset Master 2%+")
+    
+
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
     , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
     ]
@@ -269,6 +275,7 @@ myStartupHook = do
   -- spawnOnce "code ~/settings-ubuntu/ &"
   spawnOnce "autokey &"
   spawnOnce "xmodmap ~/.Xmodmap"
+  spawnOnce "xscreensaver &"
 
 
 
