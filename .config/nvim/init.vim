@@ -1,11 +1,18 @@
 source ~/.local/share/nvim/site/autoload/plug.vim
 call plug#begin()
 Plug 'vimwiki/vimwiki'
+Plug 'lervag/vimtex'
 Plug 'tpope/vim-fugitive'
 Plug 'mbbill/undotree'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*'}
 call plug#end()
+
+filetype plugin indent on
+syntax enable
+let g:vimtex_view_method = 'zathura'
+
+
 
 
 let g:vimwiki_autowriteall = 1
@@ -42,6 +49,7 @@ EOF
 
 command! Sv :source $MYVIMRC
 command! St :!tmux source-file ~/settings-ubuntu/.tmux.conf
+command! Sb :!source ~/.bashrc
 
 nnoremap <A-/> :below vsplit .<CR>
 nnoremap <A--> :below split .<CR>
