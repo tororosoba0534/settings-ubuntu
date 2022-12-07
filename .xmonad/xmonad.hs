@@ -131,7 +131,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- -- Increment the number of windows in the master area
     , ((modm              , xK_comma ), namedScratchpadAction myScratchPads "autokey")
 
-    , ((modm, xK_m), namedScratchpadAction myScratchPads "line")
+    -- , ((modm, xK_m), namedScratchpadAction myScratchPads "line")
 
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
