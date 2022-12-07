@@ -18,17 +18,17 @@ Config { font = "xft:Ubuntu Mono:pixelsize=20:antialias=true:hinting=true"
        , allDesktops = True
        , overrideRedirect = True
        , commands = [ Run Wireless "wlp3s0" [ "-t", "<essid>" ] 10
-                    , Run DynNetwork [ "--template", "<dev>: <tx>KB <rx>KB"] 10
+                    , Run DynNetwork [ "--template", "<dev>: <tx>KB <rx>KB"] 20
                     , Run Cpu ["-L","3","-H","50",
                                "--normal","green","--high","red"] 10
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
-                    , Run Swap [] 10
                     , Run Volume "default" "Master" ["-t", "Vol: <volume>%"] 5 
-                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
-                    , Run Battery ["-t", "<acstatus>: <left>% - <timeleft>"] 100
+                    , Run Date "%a %b %_d %Y <fc=#ee9a00>%H:%M:%S</fc>" "date" 10
+                    , Run Battery ["-t", "<acstatus>: <left>%"] 100
+		    , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%cpu% | %memory% * %swap% | %wlp3s0wi% | %dynnetwork% | %battery% }\
-                    \{ <fc=#ee9a00>%date%</fc> | %default:Master%"
+       , template = "%cpu% | %memory% | %wlp3s0wi% %dynnetwork% | %battery% }\
+                    \{ %StdinReader% | %date% | %default:Master%"
        }

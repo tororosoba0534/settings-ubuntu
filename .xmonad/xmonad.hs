@@ -13,6 +13,7 @@ import System.Exit
 import XMonad.Actions.WindowGo
 import XMonad.Actions.Minimize
 import XMonad.Actions.CycleWS
+import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
@@ -261,7 +262,8 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook = return ()
+-- myLogHook = return () -- dynamicLogWithPP $ def { ppOutput = hPutStrLn xmproc }
+
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -311,15 +313,7 @@ myScratchPads = [
 --
 main = do
   xmproc <- spawnPipe "xmobar -x 0 ~/.config/xmobar/xmobar.hs"
-  xmonad . docks $ ewmh defaults
-
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
--- No need to modify this.
---
-defaults = def {
+  xmonad . docks $ ewmh def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -338,9 +332,19 @@ defaults = def {
         layoutHook         = myLayout,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
-        logHook            = myLogHook,
+        logHook            = dynamicLogWithPP $ xmobarPP {
+	    ppOutput = hPutStrLn xmproc,
+	    ppOrder  = \(ws:l:_) -> [ws,l]
+	},
         startupHook        = myStartupHook
     }
+
+-- A structure containing your configuration settings, overriding
+-- fields in the default config. Any you don't override, will
+-- use the defaults defined in xmonad/XMonad/Config.hs
+--
+-- No need to modify this.
+--
 
 -- | Finally, a copy of the default bindings in simple textual tabular format.
 help :: String
