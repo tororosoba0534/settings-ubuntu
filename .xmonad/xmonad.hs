@@ -110,10 +110,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_k     ), windows W.focusUp  )
 
     -- Move focus to the master window
-    , ((modm,               xK_m     ), windows W.focusMaster  )
+    , ((modm,               xK_Return     ), windows W.focusMaster  )
 
     -- Swap the focused window and the master window
-    , ((modm,               xK_Return), windows W.swapMaster)
+    , ((modm .|. shiftMask,               xK_Return), windows W.swapMaster)
 
     -- Swap the focused window with the next window
     , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
@@ -130,6 +130,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- -- Increment the number of windows in the master area
     , ((modm              , xK_comma ), namedScratchpadAction myScratchPads "autokey")
+
+    , ((modm, xK_m), namedScratchpadAction myScratchPads "line")
 
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
@@ -287,6 +289,7 @@ myScratchPads = [
   , NS "settings" "code ~/settings-ubuntu" (className =? "Code") nonFloating
   , NS "autokey" "autokey -c" (className =? "autokey") nonFloating
   , NS "browser" "google-chrome" (className =? "Google-chrome") nonFloating
+  , NS "line" "wine ./.wine/drive_c/users/$USERNAME/AppData/Local/LINE/bin/current/LINE.exe" (className =? "line.exe") nonFloating
   ] 
   where
     spawnTerm = myTerminal
