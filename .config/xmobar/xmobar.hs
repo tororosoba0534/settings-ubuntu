@@ -23,12 +23,12 @@ Config { font = "xft:Ubuntu Mono:pixelsize=20:antialias=true:hinting=true"
                                "--normal","green","--high","red"] 10
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
                     , Run Swap [] 10
-                    , Run Com "uname" ["-s","-r"] "" 36000
+                    , Run Volume "default" "Master" ["-t", "Vol: <volume>%"] 5 
                     , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
                     , Run Battery ["-t", "<acstatus>: <left>% - <timeleft>"] 100
                     ]
        , sepChar = "%"
        , alignSep = "}{"
        , template = "%cpu% | %memory% * %swap% | %wlp3s0wi% | %dynnetwork% | %battery% }\
-                    \{ <fc=#ee9a00>%date%</fc> | %uname%"
+                    \{ <fc=#ee9a00>%date%</fc> | %default:Master%"
        }
