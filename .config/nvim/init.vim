@@ -8,10 +8,17 @@ Plug 'tpope/vim-fugitive'
 Plug 'mbbill/undotree'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*'}
+Plug 'tpope/vim-repeat'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'tami5/sqlite.lua'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'rcarriga/nvim-notify'
 call plug#end()
 
 filetype plugin indent on
 syntax enable
+set termguicolors
 let g:python3_host_prog = system('echo -n $(which python3)')
 let g:vimtex_view_method = 'zathura'
 
