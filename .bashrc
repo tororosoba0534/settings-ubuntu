@@ -180,6 +180,7 @@ function man() {
 # Custom commands
 alias ides='cd ~/settings-ubuntu; nvim .'
 alias idep='cd ~/Documents/practice; nvim .'
+alias idew='cd ~/vimwiki; nvim ./index.wiki'
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

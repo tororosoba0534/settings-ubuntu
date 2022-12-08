@@ -14,6 +14,12 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'tami5/sqlite.lua'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'rcarriga/nvim-notify'
+Plug 'petertriho/nvim-scrollbar'
+Plug 'kevinhwang91/nvim-hlslens'
+Plug 'haya14busa/vim-asterisk'
+Plug 'yutkat/confirm-quit.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'numToStr/Comment.nvim'
 call plug#end()
 
 filetype plugin indent on
@@ -29,6 +35,15 @@ let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'  " use Shift-Tab to move backward
 let g:UltiSnipsSnippetDirectoried=[$HOME.'/.config/nvim/UltiSnips']
 
 
+map *   <Plug>(asterisk-*)
+map #   <Plug>(asterisk-#)
+map g*  <Plug>(asterisk-g*)
+map g#  <Plug>(asterisk-g#)
+map z*  <Plug>(asterisk-z*)
+map gz* <Plug>(asterisk-gz*)
+map z#  <Plug>(asterisk-z#)
+map gz# <Plug>(asterisk-gz#)
+let g:asterisk#keeppos = 1
 
 
 
@@ -61,10 +76,23 @@ nnoremap <A-g> :call ToggleGStatus()<CR>
 let g:undotree_SetFocusWhenToggle = 1
 nnoremap <A-u> :UndotreeToggle<CR>
 
-"
-" bufferline.nvim config
 lua << EOF
 require("bufferline").setup{}
+require("scrollbar").setup{}
+require("hlslens").setup()
+local kopts = {noremap = true, silent = true}
+vim.api.nvim_set_keymap('n', 'n',
+    [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+    kopts)
+vim.api.nvim_set_keymap('n', 'N',
+    [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+    kopts)
+vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', '<Leader>l', '<Cmd>noh<CR>', kopts)
+require('Comment').setup()
 EOF
 
 command! Sv :source $MYVIMRC
