@@ -11,6 +11,7 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'SirVer/ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+Plug 'hrsh7th/cmp-omni'
 
 " Others
 Plug 'vimwiki/vimwiki'
@@ -196,6 +197,7 @@ cmp.setup({
     -- { name = 'snippy' }, -- For snippy users.
   }, {
     { name = 'buffer' },
+    { name = 'omni' },
   })
 })
 -- Set configuration for specific filetype.
