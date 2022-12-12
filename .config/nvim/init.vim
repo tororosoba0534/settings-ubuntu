@@ -29,7 +29,7 @@ Plug 'rcarriga/nvim-notify'
 Plug 'petertriho/nvim-scrollbar'
 Plug 'kevinhwang91/nvim-hlslens'
 Plug 'haya14busa/vim-asterisk'
-Plug 'yutkat/confirm-quit.nvim'
+" Plug 'yutkat/confirm-quit.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'numToStr/Comment.nvim'
 call plug#end()
@@ -318,7 +318,7 @@ cmp.setup.cmdline(':', {
 -- })
 require("bufferline").setup{}
 require("scrollbar").setup{}
--- require("hlslens").setup()
+require("hlslens").setup()
 -- local kopts = {noremap = true, silent = true}
 -- vim.api.nvim_set_keymap('n', 'n',
 --     [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
