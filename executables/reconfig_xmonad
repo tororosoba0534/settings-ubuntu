@@ -1,2 +1,4 @@
 #!/bin/bash
-xmonad --recompile && xmonad --restart
+# xmonad --recompile && xmonad --restart
+value=$(xmonad --recompile)
+xmessage "Hey! $value returned!"

@@ -83,7 +83,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- ((modm, xK_t), runOrRaise myTerminal (className =? myTerminalClass))
 
       ((modm, xK_space), namedScratchpadAction myScratchPads "terminal")
-    , ((modm .|. shiftMask, xK_space), namedScratchpadAction myScratchPads "subterminal")
+    -- , ((modm .|. shiftMask, xK_space), namedScratchpadAction myScratchPads "subterminal")
+    , ((modm .|. shiftMask, xK_space), spawn "~/settings-ubuntu/executables/toggle_alacritty_opacity")
 
     , ((modm, xK_b), allNamedScratchpadAction myScratchPads "browser")
 
@@ -151,7 +152,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
     -- Restart xmonad
-    , ((modm              , xK_q     ), spawn "xmonad --recompile && xmonad --restart && xmodmap ~/.Xmodmap && killall xmobar && xmobar")
+    , ((modm              , xK_q     ), spawn "~/settings-ubuntu/executables/reconfig_xmonad")
 
     , (( modm .|. shiftMask, xK_z), spawn "xscreensaver-command -lock")
     , (( 0, 0x1008FF12), spawn "amixer -D pulse sset Master 0%")

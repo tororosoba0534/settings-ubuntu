@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+opacity=$(awk '$1 == "opacity:" {print $2; exit}' ~/.config/alacritty/alacritty.yml)
+
+case $opacity in
+	1)
+		new_opacity=0.75
+		;;
+	*)
+		new_opacity=1
+		;;
+esac
+
+sed -i -- "s/opacity: $opacity/opacity: $new_opacity/" ~/.config/alacritty/alacritty.yml
