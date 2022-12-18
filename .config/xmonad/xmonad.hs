@@ -127,12 +127,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Swap the focused window with the previous window
     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
 
-    , ((modm,               xK_h     ), prevWS)
+    , ((modm,               xK_h     ), moveTo Prev $  ignoringWSs [scratchpadWorkspaceTag])
 
-    , ((modm,               xK_l     ), nextWS)
+    , ((modm,               xK_l     ), moveTo Next $  ignoringWSs [scratchpadWorkspaceTag])
+    , ((modm .|. shiftMask,               xK_h     ), (shiftTo Prev ( ignoringWSs [scratchpadWorkspaceTag])) >> (moveTo Prev ( ignoringWSs [scratchpadWorkspaceTag])))
+    , ((modm .|. shiftMask,               xK_l     ), (shiftTo Next ( ignoringWSs [scratchpadWorkspaceTag])) >> (moveTo Next ( ignoringWSs [scratchpadWorkspaceTag])))
 
     -- -- Push window back into tiling
-    -- , ((modm,               xK_t     ), withFocused $ windows . W.sink)
+    , ((modm,               xK_t     ), withFocused $ windows . W.sink)
 
     -- -- Increment the number of windows in the master area
     , ((modm              , xK_comma ), namedScratchpadAction myScratchPads "autokey")
@@ -152,7 +154,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
     -- Restart xmonad
-    , ((modm              , xK_q     ), spawn "~/settings-ubuntu/executables/reconfig_xmonad")
+    -- , ((modm              , xK_q     ), spawn "~/settings-ubuntu/executables/reconfig_xmonad")
+    , ((modm              , xK_q     ), unsafeSpawn "xmonad --recompile; xmonad --restart" ) 
 
     , (( modm .|. shiftMask, xK_z), spawn "xscreensaver-command -lock")
     , (( 0, 0x1008FF12), spawn "amixer -D pulse sset Master 0%")
