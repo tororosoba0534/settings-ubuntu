@@ -173,7 +173,7 @@ function man() {
 		# echo "$@ is ${@}"
 		# echo "INSIDE"
 	fi
-		
+		rcfg
 }
 
 #
@@ -181,6 +181,12 @@ function man() {
 alias ides='cd ~/settings-ubuntu; nvim .'
 alias idep='cd ~/Documents/practice; nvim .'
 alias idew='cd ~/vimwiki; nvim ./index.wiki'
+# alias rcfg='xmodmap ~/.Xmodmap && xmonad --recompile && xmonad --restart && killall xmobar && xmobar'
+function rcfg() {
+	xmodmap ~/.Xmodmap
+	xmonad --recompile && xmonad --restart && killall xmobar && xmobar
+}
+alias testhi='xmessage hi'
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

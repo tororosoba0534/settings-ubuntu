@@ -155,6 +155,7 @@ require("mason-lspconfig").setup()
 -- require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
 --   capabilities = capabilities
 -- }
+require'lspconfig'.hls.setup{}
 
 
 

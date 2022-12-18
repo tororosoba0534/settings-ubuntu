@@ -148,7 +148,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
     -- Restart xmonad
-    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart; xmodmap ~/.Xmodmap; killall xmobar; xmobar")
+    , ((modm              , xK_q     ), spawn "xmonad --recompile && xmonad --restart && xmodmap ~/.Xmodmap && killall xmobar && xmobar")
 
     , (( modm .|. shiftMask, xK_z), spawn "xscreensaver-command -lock")
     , (( 0, 0x1008FF12), spawn "amixer -D pulse sset Master 0%")
