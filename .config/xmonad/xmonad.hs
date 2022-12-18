@@ -31,8 +31,10 @@ import qualified Data.Map        as M
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "gnome-terminal"
-myTerminalClass = "Gnome-terminal"
+myTerminal      = "alacritty"
+myTerminalClass = "Alacritty"
+mySubTerminal      = "gnome-terminal"
+mySubTerminalClass = "Gnome-terminal"
 
 myBrowser = "google-chrome"
 
@@ -265,7 +267,7 @@ myEventHook = mempty
 -- By default, do nothing.
 myStartupHook = do
   spawnOnce "nitrogen --restore &"
-  spawnOnce "compton &"
+  spawnOnce "picom &"
   -- spawnOnce "code ~/settings-ubuntu/ &"
   spawnOnce "autokey &"
   spawnOnce "xmodmap ~/.Xmodmap"
