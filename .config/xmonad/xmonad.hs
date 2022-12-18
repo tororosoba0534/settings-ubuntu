@@ -1,3 +1,4 @@
+--
 -- xmonad example config file.
 --
 -- A template showing all available configuration hooks,
@@ -323,9 +324,9 @@ main = do
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         logHook            = dynamicLogWithPP $ xmobarPP {
-	    ppOutput = hPutStrLn xmproc,
-	    ppOrder  = \(ws:l:_) -> [ws,l]
-	},
+            ppOutput = hPutStrLn xmproc,
+            ppOrder  = \(ws:l:_) -> [ws,l]
+        },
         startupHook        = myStartupHook
     }
 

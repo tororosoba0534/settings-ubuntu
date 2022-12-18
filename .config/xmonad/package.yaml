@@ -1,0 +1,29 @@
+name:     my-xmonad
+version:  0.1.0.0
+
+dependencies:
+- base
+- xmonad >= 0.13
+- xmonad-contrib >= 0.13
+#- dbus
+#- utf8-string
+#- X11
+#- mtl
+- containers
+#- data-default
+#- fuzzy
+#- monoid-subclasses
+
+library:
+  source-dirs: lib
+
+executables:
+  my-xmonad-exe:
+    main:  ./xmonad.hs
+    ghc-options:
+    - -Werror
+    - -fno-warn-missing-signatures 
+    - -threaded
+    dependencies:
+    - my-xmonad
+
