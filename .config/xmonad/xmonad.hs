@@ -1,4 +1,3 @@
---
 -- xmonad example config file.
 --
 -- A template showing all available configuration hooks,
@@ -81,6 +80,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- ((modm, xK_t), runOrRaise myTerminal (className =? myTerminalClass))
 
       ((modm, xK_space), namedScratchpadAction myScratchPads "terminal")
+    , ((modm .|. shiftMask, xK_space), namedScratchpadAction myScratchPads "subterminal")
 
     , ((modm, xK_b), allNamedScratchpadAction myScratchPads "browser")
 
@@ -277,6 +277,7 @@ myStartupHook = do
 -- Named Scratchpad
 myScratchPads = [
   NS "terminal" spawnTerm findTerm manageTerm
+  , NS "subterminal" "xterm" (className =? "XTerm") nonFloating
   , NS "settings" "code ~/settings-ubuntu" (className =? "Code") nonFloating
   , NS "autokey" "autokey -c" (className =? "autokey") nonFloating
   , NS "browser" "google-chrome" (className =? "Google-chrome") nonFloating
