@@ -66,7 +66,7 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
+myWorkspaces    = ["home","office", "files","zoom"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -87,6 +87,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_space), spawn "~/settings-ubuntu/executables/toggle_alacritty_opacity")
 
     , ((modm, xK_b), allNamedScratchpadAction myScratchPads "browser")
+    -- , ((modm, xK_e), allNamedScratchpadAction myScratchPads "filemanager")
+    , ((modm, xK_e), spawn "nautilus")
+     
 
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "dmenu_run")
@@ -139,7 +142,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- -- Increment the number of windows in the master area
     , ((modm              , xK_comma ), namedScratchpadAction myScratchPads "autokey")
 
-    -- , ((modm, xK_m), namedScratchpadAction myScratchPads "line")
 
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
@@ -235,6 +237,7 @@ myLayout =  avoidStruts (multiCol [1] 1 0.01 (-0.5) ||| Full)
 --
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
+    , className =? "Org.gnome.Nautilus" --> doShift "files"
     -- , className =? myTerminalClass  --> doFullFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
@@ -288,7 +291,7 @@ myScratchPads = [
   , NS "settings" "code ~/settings-ubuntu" (className =? "Code") nonFloating
   , NS "autokey" "autokey -c" (className =? "autokey") nonFloating
   , NS "browser" "google-chrome" (className =? "Google-chrome") nonFloating
-  , NS "line" "wine ./.wine/drive_c/users/$USERNAME/AppData/Local/LINE/bin/current/LINE.exe" (className =? "line.exe") nonFloating
+  , NS "filemanager" "nautilus" (className =? "Org.gnome.Nautilus") nonFloating
   ] 
   where
     spawnTerm = myTerminal

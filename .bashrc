@@ -181,6 +181,7 @@ function man() {
 alias ides='cd ~/settings-ubuntu; nvim .'
 alias idep='cd ~/Documents/practice; nvim .'
 alias idew='cd ~/vimwiki; nvim ./index.wiki'
+alias idea='cd ~/Dropbox/articles; nvim .'
 # alias rcfg='xmodmap ~/.Xmodmap && xmonad --recompile && xmonad --restart && killall xmobar && xmobar'
 function rcfg() {
 	xmodmap ~/.Xmodmap
