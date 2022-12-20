@@ -1,0 +1,44 @@
+
+snippet !!! "Full template" b
+\documentclass[a4j]{jsarticle}
+
+\title{$1}
+\author{$2}
+\date{$3}
+
+\begin{document}
+\maketitle
+$0
+\end{document}
+endsnippet
+
+snippet !!a "Full template for articles" b
+\documentclass[a4paper, 12pt]{jsreport}
+\usepackage{bm}
+\usepackage{dvipdfmx}{graphicx}
+\usepackage{ascmac}
+
+\title{$1}
+\author{$2}
+\date{$3}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{はじめに}
+イントロとか
+\section{現状と問題点}
+
+最近の現状と問題点とか
+
+\section{解決策の提案}
+
+こうしたら良い的な
+
+\section{数式の書き方}
+
+\chapter{次に}
+
+\end{document}
+endsnippet

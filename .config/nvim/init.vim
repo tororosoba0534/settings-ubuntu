@@ -97,8 +97,10 @@ EOF
 command! Sv :source $MYVIMRC
 command! St :!tmux source-file ~/settings-ubuntu/.tmux.conf
 command! Sb :!source ~/.bashrc
+command! Ss :call UltiSnips#RefreshSnippets()
 
-cnoremap man vertical Man<SPACE>
+" cnoremap man vertical Man<SPACE>
+command! Ma :vertical Man
 
 nnoremap <A-/> :below vsplit .<CR>
 nnoremap <A--> :below split .<CR>
