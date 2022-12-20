@@ -173,7 +173,6 @@ function man() {
 		# echo "$@ is ${@}"
 		# echo "INSIDE"
 	fi
-		rcfg
 }
 
 #
@@ -183,10 +182,11 @@ alias idep='cd ~/Documents/practice; nvim .'
 alias idew='cd ~/vimwiki; nvim ./index.wiki'
 alias idea='cd ~/Dropbox/articles; nvim .'
 # alias rcfg='xmodmap ~/.Xmodmap && xmonad --recompile && xmonad --restart && killall xmobar && xmobar'
-function rcfg() {
+function sx() {
 	xmodmap ~/.Xmodmap
 	xmonad --recompile && xmonad --restart && killall xmobar && xmobar
 }
+alias sb='source ~/.bashrc'
 alias testhi='xmessage hi'
 
 export NVM_DIR="$HOME/.nvm"

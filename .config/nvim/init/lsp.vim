@@ -68,6 +68,7 @@ require("mason-lspconfig").setup()
 --   capabilities = capabilities
 -- }
 require'lspconfig'.hls.setup{}
+require'lspconfig'.vimls.setup{}
 
 
 

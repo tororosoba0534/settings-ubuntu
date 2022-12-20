@@ -61,7 +61,7 @@ let g:vimtex_view_method = 'zathura'
 
 
 let g:vimwiki_autowriteall = 1
-set cmdheight=3 
+" set cmdheight=3 
 set clipboard&
 set clipboard=unnamedplus
 
@@ -98,6 +98,7 @@ command! Sv :source $MYVIMRC
 command! St :!tmux source-file ~/settings-ubuntu/.tmux.conf
 command! Sb :!source ~/.bashrc
 command! Ss :call UltiSnips#RefreshSnippets()
+command! Sx :!xmodmap ~/.Xmodmap; xmonad --recompile && xmonad --restart && killall xmobar && xmobar
 
 " cnoremap man vertical Man<SPACE>
 command! Ma :vertical Man
