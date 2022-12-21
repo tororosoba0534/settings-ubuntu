@@ -14,6 +14,7 @@ Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'hrsh7th/cmp-omni'
 
 " Others
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'vimwiki/vimwiki'
 Plug 'lervag/vimtex'
 Plug 'tpope/vim-fugitive'
