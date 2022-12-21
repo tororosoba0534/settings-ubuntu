@@ -21,7 +21,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'mbbill/undotree'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*'}
-Plug 'tpope/vim-repeat'
+" Plug 'tpope/vim-repeat'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'tami5/sqlite.lua'
@@ -98,11 +98,9 @@ nnoremap <A-u> :UndotreeToggle<CR>
 
 runtime init/lsp.vim
 
-lua << EOF
-require("bufferline").setup{}
-require("scrollbar").setup{}
-require("hlslens").setup()
-EOF
+lua require("bufferline").setup{}
+lua require("scrollbar").setup{}
+lua require("hlslens").setup()
 
 command! Sv :source $MYVIMRC
 command! St :!tmux source-file ~/settings-ubuntu/.tmux.conf
@@ -121,10 +119,5 @@ nnoremap <A-k> :wincmd W<CR>
 nnoremap <A-h> :bprev<CR>
 nnoremap <A-l> :bnext<CR>
 
-" Enable multi-cursor behaviour in visual mode with <C-c>.
-" If you want to interrupt vim sequence and invalidate crashed vim script, use
-" <ESC>.
-inoremap <C-c> <ESC>---
-inoremap <ESC> <C-c>---
-
-
+" If vimscript craches, you should kill vim process.
+inoremap <C-C> <ESC>
