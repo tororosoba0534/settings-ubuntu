@@ -35,6 +35,15 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'numToStr/Comment.nvim'
 call plug#end()
 
+
+" auto IME off
+" fcitx5-remote breaks xmodmap configuration, so please considering replacing
+" it with xkb options.
+if executable('fcitx5')
+	autocmd InsertLeave * :call system('fcitx5-remote -c')
+	autocmd CmdlineLeave * :call system('fcitx5-remote -c')
+endif
+
 filetype plugin indent on
 syntax enable
 set completeopt=menu,menuone,noselect
@@ -102,7 +111,7 @@ command! Ss :call UltiSnips#RefreshSnippets()
 command! Sx :!xmodmap ~/.Xmodmap; xmonad --recompile && xmonad --restart && killall xmobar && xmobar
 
 " cnoremap man vertical Man<SPACE>
-command! Ma :vertical Man
+" command! Ma -nargs=1 :vertical Man <args>
 
 nnoremap <A-/> :below vsplit .<CR>
 nnoremap <A--> :below split .<CR>
