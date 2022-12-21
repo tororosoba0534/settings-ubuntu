@@ -66,7 +66,7 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["home","office", "files","zoom"]
+myWorkspaces    = ["home", "files","zoom"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -238,6 +238,8 @@ myLayout =  avoidStruts (multiCol [1] 1 0.01 (-0.5) ||| Full)
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Org.gnome.Nautilus" --> doShift "files"
+    , className =? "zoom" --> doShift "zoom"
+    -- , className =? "libreoffice-writer" --> doShift "office"
     -- , className =? myTerminalClass  --> doFullFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
