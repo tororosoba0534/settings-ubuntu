@@ -2,46 +2,64 @@ snippet env "New LaTeX environment" b
 \begin{$1}
     $2
 \end{$1}
-$0
 endsnippet
 
-snippet pkg "usepackage" b
+snippet \pkg "usepackage" b
 \usepackage{${1:name}}
 endsnippet
 
-snippet bul "env itemize" b
+snippet \bullist "env itemize" b
 \begin{itemize}
-	\item $0
+	\item $1
 \end{itemize}
 endsnippet
 
-snippet enu "env enumerate" b
+snippet \numlist "env enumerate" b
 \begin{enumerate}
-	\item $0
+	\item $1
 \end{enumerate}
 endsnippet
 
-snippet it "item" 
+snippet \it "item" 
 \item $0
 endsnippet
 
-snippet equ "env equation" b
+snippet \equ "env equation" b
 \begin{equation}
 $0
 \end{equation}
 endsnippet
 
-snippet se "section" b
-\section{$1}$0
+snippet \chap "chapter" b
+\chapter{$1}
 endsnippet
 
-snippet ref "ref" i
-\ref{${1:label-name}}$0
+
+snippet \se "section" b
+\section{$1}
 endsnippet
 
-snippet pageref "pageref" i
-\pageref{${1:label-name}}$0
+snippet \sse "subsection" b
+\subsection{$1}
 endsnippet
+
+
+snippet \ref "ref" i
+\ref{${1:label-name}}
+endsnippet
+
+snippet \pageref "pageref" i
+\pageref{${1:label-name}}
+endsnippet
+
+snippet \bib "bibliography" b
+\bibliography{$1}
+endsnippet
+
+snippet \bibs "bibliographystyle" b
+\bibliographystyle{jplain}
+endsnippet
+
 
 
 
