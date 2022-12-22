@@ -281,6 +281,7 @@ myStartupHook = do
   spawnOnce "autokey &"
   spawnOnce "xmodmap ~/.Xmodmap"
   spawnOnce "xscreensaver &"
+  spawnOnce "dropbox start"
 
 
 
