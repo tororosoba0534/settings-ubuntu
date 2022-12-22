@@ -17,6 +17,7 @@ Plug 'hrsh7th/cmp-omni'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'vimwiki/vimwiki'
 Plug 'lervag/vimtex'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'mbbill/undotree'
 Plug 'nvim-tree/nvim-web-devicons'
@@ -39,10 +40,11 @@ call plug#end()
 " auto IME off
 " fcitx5-remote breaks xmodmap configuration, so please considering replacing
 " it with xkb options.
-if executable('fcitx5')
-	autocmd InsertLeave * :call system('fcitx5-remote -c')
-	autocmd CmdlineLeave * :call system('fcitx5-remote -c')
-endif
+luafile ~/settings-ubuntu/.config/nvim/init/fcitx5.lua
+" source ~/settings-ubuntu/.config/nvim/init/fcitx5.vim
+
+
+	
 
 filetype plugin indent on
 syntax enable
