@@ -104,6 +104,7 @@ nnoremap <A-u> :UndotreeToggle<CR>
 nnoremap <A-f> :Files<CR>
 nnoremap <A-d> :Files ~/Dropbox/<CR>
 nnoremap <A-b> :Buffers<CR>
+let g:fzf_action = {'alt-/': 'below vsplit', 'alt--': 'below split'}
 
 runtime init/lsp.vim
 
@@ -120,9 +121,9 @@ command! Sx :!xmodmap ~/.Xmodmap; xmonad --recompile && xmonad --restart && kill
 " cnoremap man vertical Man<SPACE>
 " command! Ma -nargs=1 :vertical Man <args>
 
-nnoremap <A-/> :below vsplit .<CR>
-nnoremap <A--> :below split .<CR>
-nnoremap <A-t> :tabnew .<CR>
+" nnoremap <A-/> :below vsplit .<CR>
+" nnoremap <A--> :below split .<CR>
+" nnoremap <A-t> :tabnew .<CR>
 nnoremap <A-j> :wincmd w<CR>
 nnoremap <A-k> :wincmd W<CR>
 nnoremap <A-h> :bprev<CR>
