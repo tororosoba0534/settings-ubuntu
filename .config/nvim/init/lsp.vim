@@ -127,7 +127,8 @@ cmp.setup({
       {'i', 'c'}
     )
     ,
-    ['<CR>'] = cmp.mapping.confirm({select = false})
+    ['<CR>'] = cmp.mapping.confirm({select = true})
+    ,['<End>'] = cmp.mapping.abort()
     ,
     ['<Tab>'] = cmp.mapping(
       function(fallback)
