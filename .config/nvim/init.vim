@@ -53,6 +53,9 @@ set completeopt=menu,menuone,noselect
 set termguicolors
 set pumblend=10
 set scrolloff=5
+set wrap
+set showbreak=>>>
+set breakindent
 let g:python3_host_prog = system('echo -n $(which python3)')
 let g:vimtex_view_method = 'zathura'
 
@@ -109,8 +112,8 @@ let g:fzf_action = {'alt-/': 'below vsplit', 'alt--': 'below split'}
 runtime init/lsp.vim
 
 lua require("bufferline").setup{}
-lua require("scrollbar").setup{}
-lua require("hlslens").setup()
+" lua require("scrollbar").setup{}
+" lua require("hlslens").setup()
 
 command! Sv :source $MYVIMRC
 command! St :!tmux source-file ~/settings-ubuntu/.tmux.conf
