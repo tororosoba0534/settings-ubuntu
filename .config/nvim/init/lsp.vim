@@ -1,8 +1,8 @@
 
 " This code should go in your vimrc or init.vim
 let g:UltiSnipsExpandTrigger       = '<Tab>'    " use Tab to expand snippets
-let g:UltiSnipsJumpForwardTrigger  = '<C-n>'    " use Tab to move forward through tabstops
-let g:UltiSnipsJumpBackwardTrigger = '<C-p>'  " use Shift-Tab to move backward through tabstops
+let g:UltiSnipsJumpForwardTrigger  = '<Tab>'    " use Tab to move forward through tabstops
+let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'  " use Shift-Tab to move backward through tabstops
 let g:UltiSnipsSnippetDirectoried=[$HOME.'/.config/nvim/UltiSnips']
 
 lua << EOF
@@ -128,6 +128,27 @@ cmp.setup({
     )
     ,
     ['<CR>'] = cmp.mapping.confirm({select = false})
+    ,
+    ['<Tab>'] = cmp.mapping(
+      function(fallback)
+        if cmp.visible() then
+		cmp.select_next_item()
+	else
+		fallback()
+	end
+      end,
+      {'i', 'c'}
+    ),
+    ['<S-Tab>'] = cmp.mapping(
+      function(fallback)
+        if cmp.visible() then
+		cmp.select_prev_item()
+	else
+		fallback()
+	end
+      end,
+      {'i', 'c'}
+    )
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
