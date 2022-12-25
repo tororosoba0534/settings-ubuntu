@@ -102,6 +102,7 @@ nnoremap <A-u> :UndotreeToggle<CR>
 "
 " fzf.vim configurations
 nnoremap <A-f> :Files<CR>
+nnoremap <A-d> :Files ~/Dropbox/<CR>
 nnoremap <A-b> :Buffers<CR>
 
 runtime init/lsp.vim
