@@ -11,3 +11,7 @@ fi
 # Key bindings
 # ------------
 source "/$HOME/.fzf/shell/key-bindings.bash"
+
+# Environment Variables
+# export FZF_DEFAULT_OPTS="--hidden"
+export FZF_DEFAULT_COMMAND='rg --hidden -l ""'

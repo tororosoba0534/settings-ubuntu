@@ -15,6 +15,7 @@ Plug 'hrsh7th/cmp-omni'
 
 " Others
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'lervag/vimtex'
 Plug 'tpope/vim-dispatch'
@@ -97,6 +98,11 @@ nnoremap <A-g> :call ToggleGStatus()<CR>
 " undotree configurations
 let g:undotree_SetFocusWhenToggle = 1
 nnoremap <A-u> :UndotreeToggle<CR>
+
+"
+" fzf.vim configurations
+nnoremap <A-f> :Files<CR>
+nnoremap <A-b> :Buffers<CR>
 
 runtime init/lsp.vim
 
