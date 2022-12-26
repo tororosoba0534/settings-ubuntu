@@ -1,5 +1,6 @@
-let s:latexmk = 'latexmk -output-directory=%:h %'
+let s:latexmk = 'latexmk -pv -cd %:h %'
 let &l:makeprg = expand(s:latexmk)
+" let &l:makeprg = expand('echo "HELLO WORLD!!"')
 
 " This code would go in compiler/tex.vim
 " The code code sets Vim's errorformat for compiling LaTeX.

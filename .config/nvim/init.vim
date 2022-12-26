@@ -120,6 +120,8 @@ command! St :!tmux source-file ~/settings-ubuntu/.tmux.conf
 command! Sb :!source ~/.bashrc
 command! Ss :call UltiSnips#RefreshSnippets()
 command! Sx :!xmodmap ~/.Xmodmap; xmonad --recompile && xmonad --restart && killall xmobar && xmobar
+command! Tex :!latexmk -cd %:h/ %
+command! Zathura :!zathura %:p:r.pdf &
 
 " cnoremap man vertical Man<SPACE>
 " command! Ma -nargs=1 :vertical Man <args>
