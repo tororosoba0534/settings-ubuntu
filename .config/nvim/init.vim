@@ -115,12 +115,21 @@ lua require("bufferline").setup{}
 " lua require("scrollbar").setup{}
 " lua require("hlslens").setup()
 
+function! Tex()
+	if (&ft != 'tex')
+		echo 'NO TEX!'
+		return 1
+	endif
+	!latexmk -cd %:h/ %
+	" echo "YES!!"
+endfunction
+
 command! Sv :source $MYVIMRC
 command! St :!tmux source-file ~/settings-ubuntu/.tmux.conf
 command! Sb :!source ~/.bashrc
 command! Ss :call UltiSnips#RefreshSnippets()
 command! Sx :!xmodmap ~/.Xmodmap; xmonad --recompile && xmonad --restart && killall xmobar && xmobar
-command! Tex :!latexmk -cd %:h/ %
+command! Tex :call Tex()
 command! Zathura :!zathura %:p:r.pdf &
 
 " cnoremap man vertical Man<SPACE>
