@@ -22,6 +22,8 @@ import XMonad.Layout.Minimize
 import XMonad.Layout.MultiColumns
 -- import XMonad.Layout.ResizableThreeColumns
 import qualified XMonad.Layout.BoringWindows as BW
+import XMonad.Prompt
+import XMonad.Prompt.Workspace
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
@@ -137,6 +139,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_l     ), moveTo Next $  ignoringWSs [scratchpadWorkspaceTag])
     , ((modm .|. shiftMask,               xK_h     ), (shiftTo Prev ( ignoringWSs [scratchpadWorkspaceTag])) >> (moveTo Prev ( ignoringWSs [scratchpadWorkspaceTag])))
     , ((modm .|. shiftMask,               xK_l     ), (shiftTo Next ( ignoringWSs [scratchpadWorkspaceTag])) >> (moveTo Next ( ignoringWSs [scratchpadWorkspaceTag])))
+    , ((modm, xK_g), ( workspacePrompt def (windows . W.greedyView)))
 
     -- -- Push window back into tiling
     , ((modm,               xK_t     ), withFocused $ windows . W.sink)
