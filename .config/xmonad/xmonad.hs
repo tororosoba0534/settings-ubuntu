@@ -31,8 +31,10 @@ import qualified Data.Map        as M
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "alacritty"
-myTerminalClass = "Alacritty"
+-- myTerminal      = "alacritty"
+-- myTerminalClass = "Alacritty"
+myTerminal = "gnome-terminal"
+myTerminalClass = "Gnome-terminal"
 mySubTerminal      = "gnome-terminal"
 mySubTerminalClass = "Gnome-terminal"
 
@@ -66,7 +68,7 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["home", "files","zoom"]
+myWorkspaces    = ["home", "files","zoom", "firefox", "obs", "openshot"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -239,6 +241,9 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Org.gnome.Nautilus" --> doShift "files"
     , className =? "zoom" --> doShift "zoom"
+    , className =? "obs" --> doShift "obs"
+    , className =? "openshot" --> doShift "openshot"
+    , className =? "firefox" --> doShift "firefox"
     -- , className =? "libreoffice-writer" --> doShift "office"
     -- , className =? myTerminalClass  --> doFullFloat
     , className =? "Gimp"           --> doFloat
