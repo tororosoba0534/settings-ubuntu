@@ -69,6 +69,7 @@ require("mason-lspconfig").setup()
 -- }
 require'lspconfig'.hls.setup{}
 require'lspconfig'.vimls.setup{}
+require("trouble").setup {}
 
 
 

@@ -12,6 +12,7 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'SirVer/ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'hrsh7th/cmp-omni'
+Plug 'folke/trouble.nvim'
 
 " Others
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
