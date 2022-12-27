@@ -13,6 +13,7 @@ import System.Exit
 import XMonad.Actions.WindowGo
 import XMonad.Actions.Minimize
 import XMonad.Actions.CycleWS
+import XMonad.Actions.Submap
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
@@ -23,6 +24,7 @@ import XMonad.Layout.MultiColumns
 -- import XMonad.Layout.ResizableThreeColumns
 import qualified XMonad.Layout.BoringWindows as BW
 import XMonad.Prompt
+import XMonad.Prompt.RunOrRaise
 import XMonad.Prompt.Workspace
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.SpawnOnce
@@ -61,16 +63,6 @@ myBorderWidth   = 5
 --
 myModMask       = mod4Mask
 
--- The default number of workspaces (virtual screens) and their names.
--- By default we use numeric strings, but any string may be used as a
--- workspace name. The number of workspaces is determined by the length
--- of this list.
---
--- A tagging example:
---
--- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
---
-myWorkspaces    = ["home", "files","zoom", "firefox", "obs", "openshot"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -139,7 +131,20 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_l     ), moveTo Next $  ignoringWSs [scratchpadWorkspaceTag])
     , ((modm .|. shiftMask,               xK_h     ), (shiftTo Prev ( ignoringWSs [scratchpadWorkspaceTag])) >> (moveTo Prev ( ignoringWSs [scratchpadWorkspaceTag])))
     , ((modm .|. shiftMask,               xK_l     ), (shiftTo Next ( ignoringWSs [scratchpadWorkspaceTag])) >> (moveTo Next ( ignoringWSs [scratchpadWorkspaceTag])))
-    , ((modm, xK_g), ( workspacePrompt def (windows . W.greedyView)))
+    , ((modm, xK_g), ( workspacePrompt def {autoComplete = Just 100000} (windows . W.greedyView)))
+    -- , ((modm, xK_g), (runOrRaisePrompt def {
+    --   autoComplete = Just 100000
+    -- }))
+
+    , ((modm .|. shiftMask, xK_s), submap . M.fromList $
+      [((modm .|. shiftMask, xK_s), 
+      do
+        runOrRaise "openshot-qt" (className =? "openshot")
+        runOrRaise "obs" (className =? "obs")
+        runOrRaise "nautilus" (className =? "Org.gnome.Nautilus")
+        runOrRaise "firefox" (className =? "firefox")
+      ) ]
+    )
 
     -- -- Push window back into tiling
     , ((modm,               xK_t     ), withFocused $ windows . W.sink)
@@ -226,6 +231,22 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 myLayout =  avoidStruts (multiCol [1] 1 0.01 (-0.5) ||| Full)
 
 ------------------------------------------------------------------------
+-- The default number of workspaces (virtual screens) and their names.
+-- By default we use numeric strings, but any string may be used as a
+-- workspace name. The number of workspaces is determined by the length
+-- of this list.
+--
+-- A tagging example:
+--
+-- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
+--
+myWsHome = "home"
+myWsFiles = "explorer"
+myWsZoom = "zoom"
+myWsFirefox = "firefox"
+myWsObs = "obs"
+myWsOpenshot = "videoedit"
+myWorkspaces    = [myWsHome, myWsFiles, myWsFirefox, myWsObs, myWsOpenshot, myWsZoom]
 -- Window rules:
 
 -- Execute arbitrary actions and WindowSet manipulations when managing
@@ -242,11 +263,11 @@ myLayout =  avoidStruts (multiCol [1] 1 0.01 (-0.5) ||| Full)
 --
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
-    , className =? "Org.gnome.Nautilus" --> doShift "files"
-    , className =? "zoom" --> doShift "zoom"
-    , className =? "obs" --> doShift "obs"
-    , className =? "openshot" --> doShift "openshot"
-    , className =? "firefox" --> doShift "firefox"
+    , className =? "Org.gnome.Nautilus" --> doShift myWsFiles
+    , className =? "zoom" --> doShift myWsZoom
+    , className =? "obs" --> doShift myWsObs
+    , className =? "openshot" --> doShift myWsOpenshot
+    , className =? "firefox" --> doShift myWsFirefox
     -- , className =? "libreoffice-writer" --> doShift "office"
     -- , className =? myTerminalClass  --> doFullFloat
     , className =? "Gimp"           --> doFloat
