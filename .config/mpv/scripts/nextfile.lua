@@ -142,9 +142,9 @@ function movetofile(forward)
   end
 end
 
-mp.add_key_binding('PGDWN', 'nextfile', nexthandler)
-mp.add_key_binding('KP9', 'nextfile', nexthandler)
-mp.add_key_binding('Alt+l', 'nextfile', nexthandler)
-mp.add_key_binding('PGUP', 'previousfile', prevhandler)
-mp.add_key_binding('KP7', 'previousfile', prevhandler)
-mp.add_key_binding('Alt+j', 'previousfile', prevhandler)
+-- mp.add_key_binding('PGDWN', 'nextfile', nexthandler)
+-- mp.add_key_binding('KP9', 'nextfile', nexthandler)
+mp.add_key_binding('y', 'nextfile', nexthandler)
+-- mp.add_key_binding('PGUP', 'previousfile', prevhandler)
+-- mp.add_key_binding('KP7', 'previousfile', prevhandler)
+mp.add_key_binding('o', 'previousfile', prevhandler)
