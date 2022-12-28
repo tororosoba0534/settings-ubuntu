@@ -142,5 +142,5 @@ function movetofile(forward)
   end
 end
 
-mp.add_key_binding('Shift+RIGHT', 'nextfile', nexthandler)
-mp.add_key_binding('Shift+LEFT', 'previousfile', prevhandler)
+mp.add_key_binding('PGDWN', 'nextfile', nexthandler)
+mp.add_key_binding('PGUP', 'previousfile', prevhandler)
