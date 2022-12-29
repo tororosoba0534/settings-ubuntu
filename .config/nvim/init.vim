@@ -162,6 +162,7 @@ command! -nargs=* En :call EditInOtherDir('~/Dropbox/notetaking/', <f-args>)  "c
 
 " cnoremap man vertical Man<SPACE>
 " command! Ma -nargs=1 :vertical Man <args>
+nnoremap <A-m> :bel vert Man 
 
 nnoremap <C-w>/ :below vsplit<CR>
 nnoremap <C-w>- :below split<CR>
