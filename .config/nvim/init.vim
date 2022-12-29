@@ -145,6 +145,20 @@ command! Ss :call UltiSnips#RefreshSnippets()
 command! Sx :!xmodmap ~/.Xmodmap; xmonad --recompile && xmonad --restart && killall xmobar && xmobar
 command! Tex :call Tex()
 command! Zathura :!zathura %:p:r.pdf &
+function! EditInOtherDir(dirPath, ...)
+	execute 'cd'  fnameescape(a:dirPath)
+	try
+		" let fileNames = a:000[1:]
+		let fileNames = a:000
+		" execute 'e' a:fileNames
+		for name in fileNames
+			execute 'e' name
+		endfor
+	finally
+		cd -
+	endtry
+endfunction
+command! -nargs=* En :call EditInOtherDir('~/Dropbox/notetaking/', <f-args>)  "cd ~/Dropbox/notetaking/<CR>:e <args><CR>:cd -
 
 " cnoremap man vertical Man<SPACE>
 " command! Ma -nargs=1 :vertical Man <args>
