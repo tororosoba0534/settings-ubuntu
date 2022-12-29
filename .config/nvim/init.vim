@@ -163,13 +163,13 @@ command! -nargs=* En :call EditInOtherDir('~/Dropbox/notetaking/', <f-args>)  "c
 " cnoremap man vertical Man<SPACE>
 " command! Ma -nargs=1 :vertical Man <args>
 
-" nnoremap <A-/> :below vsplit .<CR>
-" nnoremap <A--> :below split .<CR>
-" nnoremap <A-t> :tabnew .<CR>
-nnoremap <A-j> :wincmd w<CR>
-nnoremap <A-k> :wincmd W<CR>
-nnoremap <A-h> :bprev<CR>
-nnoremap <A-l> :bnext<CR>
+nnoremap <C-w>/ :below vsplit<CR>
+nnoremap <C-w>- :below split<CR>
+nnoremap <C-w>c :close<CR>
+nnoremap <C-w>j :wincmd w<CR>
+nnoremap <C-w>k :wincmd W<CR>
+nnoremap <C-w>h :bprev<CR>
+nnoremap <C-w>l :bnext<CR>
 
 " If vimscript craches, you should kill vim process.
 inoremap <C-C> <ESC>
