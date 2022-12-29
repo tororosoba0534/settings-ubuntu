@@ -1,3 +1,5 @@
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
 source ~/.local/share/nvim/site/autoload/plug.vim
 call plug#begin()
 " Language supports
@@ -17,6 +19,7 @@ Plug 'folke/trouble.nvim'
 " Others
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'nvim-tree/nvim-tree.lua'
 Plug 'vimwiki/vimwiki'
 Plug 'lervag/vimtex'
 Plug 'tpope/vim-dispatch'
@@ -30,12 +33,12 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'tami5/sqlite.lua'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'rcarriga/nvim-notify'
-Plug 'petertriho/nvim-scrollbar'
-Plug 'kevinhwang91/nvim-hlslens'
-Plug 'haya14busa/vim-asterisk'
+" Plug 'petertriho/nvim-scrollbar'
+" Plug 'kevinhwang91/nvim-hlslens'
+" Plug 'haya14busa/vim-asterisk'
 " Plug 'yutkat/confirm-quit.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'numToStr/Comment.nvim'
+" Plug 'numToStr/Comment.nvim'
 call plug#end()
 
 
@@ -105,10 +108,13 @@ nnoremap <A-u> :UndotreeToggle<CR>
 
 "
 " fzf.vim configurations
-nnoremap <A-f> :Files<CR>
-nnoremap <A-d> :Files ~/Dropbox/<CR>
+" nnoremap <A-f> :Files<CR>
+nnoremap <A-s> :Files ~/settings-ubuntu<CR>
+" nnoremap <A-d> :Files ~/Dropbox/<CR>
+nnoremap <A-n> :Files ~/Dropbox/notetaking/<CR>
+nnoremap <A-a> :Files ~/Dropbox/articles/<CR>
 nnoremap <A-b> :Buffers<CR>
-let g:fzf_action = {'alt-/': 'below vsplit', 'alt--': 'below split'}
+let g:fzf_action = {'/': 'below vsplit', '-': 'below split'}
 
 runtime init/lsp.vim
 
@@ -146,3 +152,8 @@ nnoremap <A-l> :bnext<CR>
 
 " If vimscript craches, you should kill vim process.
 inoremap <C-C> <ESC>
+
+lua << EOF
+require("nvim-tree").setup()
+vim.api.nvim_set_keymap('n', '<A-f>', ':NvimTreeToggle<CR>', {noremap = true})
+EOF
