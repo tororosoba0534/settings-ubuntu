@@ -115,6 +115,13 @@ nnoremap <A-n> :Files ~/Dropbox/notetaking/<CR>
 nnoremap <A-a> :Files ~/Dropbox/articles/<CR>
 nnoremap <A-b> :Buffers<CR>
 let g:fzf_action = {'/': 'below vsplit', '-': 'below split'}
+augroup fzf
+	autocmd!
+	autocmd FileType fzf tnoremap <buffer> <A-s> <c-c>
+	autocmd FileType fzf tnoremap <buffer> <A-n> <c-c>
+	autocmd FileType fzf tnoremap <buffer> <A-a> <c-c>
+	autocmd FileType fzf tnoremap <buffer> <A-b> <c-c>
+augroup END
 
 runtime init/lsp.vim
 
