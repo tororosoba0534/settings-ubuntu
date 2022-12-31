@@ -122,6 +122,10 @@ augroup fzf
 	autocmd FileType fzf tnoremap <buffer> <A-a> <c-c>
 	autocmd FileType fzf tnoremap <buffer> <A-b> <c-c>
 augroup END
+nnoremap <A-e>s :e ~/settings-ubuntu/
+nnoremap <A-e>c :e ~/settings-ubuntu/.config/
+nnoremap <A-e>d :e ~/Dropbox/
+nnoremap <A-e>n :e ~/Dropbox/notetaking/
 
 runtime init/lsp.vim
 
@@ -162,7 +166,7 @@ command! -nargs=* En :call EditInOtherDir('~/Dropbox/notetaking/', <f-args>)  "c
 
 " cnoremap man vertical Man<SPACE>
 " command! Ma -nargs=1 :vertical Man <args>
-nnoremap <A-m> :bel vert Man 
+nnoremap <A-m> :bel vert Man<SPACE>
 
 nnoremap <C-w>/ :below vsplit<CR>
 nnoremap <C-w>- :below split<CR>
@@ -171,9 +175,16 @@ nnoremap <C-w>j :wincmd w<CR>
 nnoremap <C-w>k :wincmd W<CR>
 nnoremap <C-w>h :bprev<CR>
 nnoremap <C-w>l :bnext<CR>
+nnoremap <C-w>w :vert res +25<CR> 
+nnoremap <C-w>W :vert res -25<CR> 
+nnoremap <C-w>t :res +15<CR>
+nnoremap <C-w>T :res -15<CR>
+nnoremap <C-w>= :horizontal wincmd =<CR>
 
 " If vimscript craches, you should kill vim process.
 inoremap <C-C> <ESC>
+
+tnoremap <C-[> <C-\><C-n>
 
 lua << EOF
 require("nvim-tree").setup()
