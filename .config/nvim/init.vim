@@ -63,6 +63,7 @@ set breakindent
 let g:python3_host_prog = system('echo -n $(which python3)')
 let g:vimtex_view_method = 'zathura'
 
+set statusline=%F\%=%l/%L\ lines\ (%p%%)
 
 
 " map *   <Plug>(asterisk-*)
@@ -84,6 +85,9 @@ let g:vimwiki_autowriteall = 1
 " set cmdheight=3 
 set clipboard&
 set clipboard=unnamedplus
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+	\,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+	\,sm:block-blinkwait175-blinkoff150-blinkon175
 
 "
 " vim-fugitive configuration
@@ -185,6 +189,11 @@ nnoremap <C-w>= :horizontal wincmd =<CR>
 inoremap <C-C> <ESC>
 
 tnoremap <C-[> <C-\><C-n>
+augroup terminal
+	autocmd!
+	autocmd FocusLost * hi TermCursor cterm=NONE gui=NONE
+	autocmd FocusGained * hi TermCursor cterm=reverse gui=reverse
+augroup END
 
 lua << EOF
 require("nvim-tree").setup()
