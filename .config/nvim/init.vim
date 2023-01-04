@@ -126,10 +126,10 @@ augroup fzf
 	autocmd FileType fzf tnoremap <buffer> <A-a> <c-c>
 	autocmd FileType fzf tnoremap <buffer> <A-b> <c-c>
 augroup END
-nnoremap <A-e>s :e ~/settings-ubuntu/
-nnoremap <A-e>c :e ~/settings-ubuntu/.config/
-nnoremap <A-e>d :e ~/Dropbox/
-nnoremap <A-e>n :e ~/Dropbox/notetaking/
+nnoremap <A-e>s :NvimTreeToggle ~/settings-ubuntu/<CR>
+nnoremap <A-e>c :NvimTreeToggle ~/settings-ubuntu/.config/<CR>
+nnoremap <A-e>d :NvimTreeToggle ~/Dropbox/<CR>
+nnoremap <A-e>n :NvimTreeToggle ~/Dropbox/notetaking/<CR>
 
 runtime init/lsp.vim
 
@@ -189,6 +189,7 @@ nnoremap <C-w>= :horizontal wincmd =<CR>
 inoremap <C-C> <ESC>
 
 tnoremap <C-[> <C-\><C-n>
+tnoremap <C-w>j <C-\><C-n>:wincmd w<CR>
 augroup terminal
 	autocmd!
 	autocmd FocusLost * hi TermCursor cterm=NONE gui=NONE
