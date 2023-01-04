@@ -185,11 +185,16 @@ nnoremap <C-w>t :res +15<CR>
 nnoremap <C-w>T :res -15<CR>
 nnoremap <C-w>= :horizontal wincmd =<CR>
 
+set equalalways
+set winfixheight
+
 " If vimscript craches, you should kill vim process.
 inoremap <C-C> <ESC>
 
+command T :bel sp | te
 tnoremap <C-[> <C-\><C-n>
 tnoremap <C-w>j <C-\><C-n>:wincmd w<CR>
+tnoremap <C-w>k <C-\><C-n>:wincmd W<CR>
 augroup terminal
 	autocmd!
 	autocmd FocusLost * hi TermCursor cterm=NONE gui=NONE
