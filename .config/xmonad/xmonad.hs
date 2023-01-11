@@ -12,12 +12,15 @@ import Data.Monoid
 import System.Exit
 import XMonad.Actions.WindowGo
 import XMonad.Actions.Minimize
+import XMonad.Actions.RotSlaves
 import XMonad.Actions.CycleWS
 import XMonad.Actions.Submap
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
+import XMonad.Layout.Accordion
+import XMonad.Layout.Spiral
 import XMonad.Layout.Magnifier as Mag
 import XMonad.Layout.Minimize
 import XMonad.Layout.MultiColumns
@@ -31,6 +34,7 @@ import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
+import XMonad.Layout.ThreeColumns (ThreeCol(ThreeCol))
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -88,10 +92,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
      
 
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_run")
+    , ((modm,               xK_o     ), spawn "dmenu_run")
 
     -- launch gmrun
-    , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
+    , ((modm .|. shiftMask, xK_o     ), spawn "gmrun")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
@@ -102,8 +106,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- --  Reset the layouts on the current workspace to default
     -- , ((modm .|. shiftMask, xK_r ), setLayout $ XMonad.layoutHook conf)
 
-    -- Resize viewed windows to the correct size
-    , ((modm,               xK_n     ), refresh)
+    -- -- Resize viewed windows to the correct size
+    -- , ((modm,               xK_n     ), refresh)
 
     -- Move focus to the next window
     , ((modm,               xK_Tab   ), windows W.focusDown)
@@ -113,6 +117,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Move focus to the previous window
     , ((modm,               xK_k     ), windows W.focusUp  )
+    , ((modm,               xK_n     ), rotAllUp  )
+    , ((modm,               xK_p     ), rotAllDown  )
 
     -- Move focus to the master window
     , ((modm,               xK_Return     ), windows W.focusMaster  )
@@ -126,9 +132,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Swap the focused window with the previous window
     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
 
-    , ((modm,               xK_h     ), moveTo Prev $  ignoringWSs [scratchpadWorkspaceTag])
+    , ((modm,               xK_h     ), moveTo Prev $ Not emptyWS :&: ignoringWSs [scratchpadWorkspaceTag])
+    , ((0,               xK_Page_Up     ), moveTo Prev $ Not emptyWS :&: ignoringWSs [scratchpadWorkspaceTag])
 
-    , ((modm,               xK_l     ), moveTo Next $  ignoringWSs [scratchpadWorkspaceTag])
+    , ((modm,               xK_l     ), moveTo Next $ Not emptyWS :&:  ignoringWSs [scratchpadWorkspaceTag])
+    , ((0,               xK_Page_Down     ), moveTo Next $  Not emptyWS :&: ignoringWSs [scratchpadWorkspaceTag])
     , ((modm .|. shiftMask,               xK_h     ), (shiftTo Prev ( ignoringWSs [scratchpadWorkspaceTag])) >> (moveTo Prev ( ignoringWSs [scratchpadWorkspaceTag])))
     , ((modm .|. shiftMask,               xK_l     ), (shiftTo Next ( ignoringWSs [scratchpadWorkspaceTag])) >> (moveTo Next ( ignoringWSs [scratchpadWorkspaceTag])))
     , ((modm, xK_g), ( workspacePrompt def {autoComplete = Just 100000} (windows . W.greedyView)))
@@ -228,7 +236,12 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout =  avoidStruts (multiCol [1] 1 0.01 (-0.5) ||| Full)
+-- myLayout =  avoidStruts (multiCol [1] 1 0.01 (-0.5) ||| multiCol [1] 1 0.01 (0.4) ||| Full)
+-- myLayout =  avoidStruts (multiCol [1] 1 0.01 (-0.5) ||| Tall 1 0 0.4 ||| Full)
+-- myLayout =  avoidStruts (ThreeCol 1 0 0.5 ||| spiral (1/2) ||| Accordion ||| Full)
+-- myLayout =  avoidStruts (ThreeCol 1 0 0.5 ||| Mag.magnifier' (Tall 1 0 0.8) ||| Full)
+myLayout =  avoidStruts (multiCol [1] 2 0.01 (-0.5) ||| Mag.magnifier' (Tall 1 0 0.8) ||| Full)
+-- myLayout =  avoidStruts (ThreeCol 1 0 0.5 ||| spiral (1/2) |||  (Tall 1 0 0.8) ||| Full)
 
 ------------------------------------------------------------------------
 -- The default number of workspaces (virtual screens) and their names.
@@ -242,11 +255,13 @@ myLayout =  avoidStruts (multiCol [1] 1 0.01 (-0.5) ||| Full)
 --
 myWsHome = "home"
 myWsFiles = "explorer"
+myPdf = "pdf"
 myWsZoom = "zoom"
 myWsFirefox = "firefox"
 myWsObs = "obs"
 myWsOpenshot = "videoedit"
-myWorkspaces    = [myWsHome, myWsFiles, myWsFirefox, myWsObs, myWsOpenshot, myWsZoom]
+myGimp = "gimp"
+myWorkspaces    = [myWsHome, myWsFiles, myPdf, myWsFirefox, myWsObs, myWsOpenshot, myGimp, myWsZoom]
 -- Window rules:
 
 -- Execute arbitrary actions and WindowSet manipulations when managing
@@ -264,13 +279,15 @@ myWorkspaces    = [myWsHome, myWsFiles, myWsFirefox, myWsObs, myWsOpenshot, myWs
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Org.gnome.Nautilus" --> doShift myWsFiles
+    , className =? "Zathura" --> doShift myPdf
     , className =? "zoom" --> doShift myWsZoom
     , className =? "obs" --> doShift myWsObs
     , className =? "openshot" --> doShift myWsOpenshot
     , className =? "firefox" --> doShift myWsFirefox
     -- , className =? "libreoffice-writer" --> doShift "office"
     -- , className =? myTerminalClass  --> doFullFloat
-    , className =? "Gimp"           --> doFloat
+    -- , className =? "Gimp"           --> doFloat
+    , className =? "Gimp"           --> doShift myGimp
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
     <+> namedScratchpadManageHook myScratchPads
