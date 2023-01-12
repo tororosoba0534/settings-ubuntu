@@ -113,23 +113,32 @@ nnoremap <A-u> :UndotreeToggle<CR>
 "
 " fzf.vim configurations
 " nnoremap <A-f> :Files<CR>
-nnoremap <A-s> :Files ~/settings-ubuntu<CR>
-" nnoremap <A-d> :Files ~/Dropbox/<CR>
-nnoremap <A-n> :Files ~/Dropbox/notetaking/<CR>
-nnoremap <A-a> :Files ~/Dropbox/articles/<CR>
 nnoremap <A-b> :Buffers<CR>
+nnoremap <A-e>S :Files ~/settings-ubuntu<CR>
+nnoremap <A-e>C :Files ~/settings-ubuntu/.config/<CR>
+nnoremap <A-e>D :Files ~/Dropbox/<CR>
+nnoremap <A-e>N :Files ~/Dropbox/notetaking/<CR>
+nnoremap <A-e>A :Files ~/Dropbox/articles/<CR>
+nnoremap <A-e>P :Files ~/Documents/practice/<CR>
 let g:fzf_action = {'/': 'below vsplit', '-': 'below split'}
 augroup fzf
 	autocmd!
-	autocmd FileType fzf tnoremap <buffer> <A-s> <c-c>
-	autocmd FileType fzf tnoremap <buffer> <A-n> <c-c>
-	autocmd FileType fzf tnoremap <buffer> <A-a> <c-c>
+	" autocmd FileType fzf tnoremap <buffer> <A-e> <c-c>:NvimTreeToggle<CR>
 	autocmd FileType fzf tnoremap <buffer> <A-b> <c-c>
+	" autocmd FileType fzf echo "Hey!"
 augroup END
-nnoremap <A-e>s :NvimTreeToggle ~/settings-ubuntu/<CR>
-nnoremap <A-e>c :NvimTreeToggle ~/settings-ubuntu/.config/<CR>
-nnoremap <A-e>d :NvimTreeToggle ~/Dropbox/<CR>
-nnoremap <A-e>n :NvimTreeToggle ~/Dropbox/notetaking/<CR>
+nnoremap <A-e>e :NvimTreeToggle<CR>
+nnoremap <A-e>s :NvimTreeClose \| NvimTreeOpen ~/settings-ubuntu/<CR>
+nnoremap <A-e>c :NvimTreeClose \| NvimTreeOpen ~/settings-ubuntu/.config/<CR>
+nnoremap <A-e>d :NvimTreeClose \| NvimTreeOpen ~/Dropbox/<CR>
+nnoremap <A-e>n :NvimTreeClose \| NvimTreeOpen ~/Dropbox/notetaking/<CR>
+nnoremap <A-e>a :NvimTreeClose \| NvimTreeOpen ~/Dropbox/articles/<CR>
+nnoremap <A-e>p :NvimTreeClose \| NvimTreeOpen ~/Documents/practice/<CR>
+augroup NvimTree
+	autocmd!
+	" autocmd FileType NvimTree nnoremap <buffer> <c-c> :close<CR>
+	" autocmd BufEnter NvimTree echo "Hey!"<CR>
+augroup END
 
 runtime init/lsp.vim
 
@@ -203,5 +212,5 @@ augroup END
 
 lua << EOF
 require("nvim-tree").setup()
-vim.api.nvim_set_keymap('n', '<A-f>', ':NvimTreeToggle<CR>', {noremap = true})
+-- vim.api.nvim_set_keymap('n', '<A-f>', ':NvimTreeToggle<CR>', {noremap = true})
 EOF
