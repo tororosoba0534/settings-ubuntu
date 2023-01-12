@@ -177,7 +177,7 @@ function man() {
 
 #
 # Custom commands
-alias ides='cd ~/settings-ubuntu; nvim .'
+alias ides='cd ~/settings-ubuntu; nvim .config/nvim/init.vim .config/xmonad/xmonad.hs .bashrc .tmux.conf'
 alias idep='cd ~/Documents/practice; nvim .'
 alias idew='cd ~/vimwiki; nvim ./index.wiki'
 alias idea='cd ~/Dropbox/articles; nvim .'

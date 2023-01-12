@@ -200,7 +200,17 @@ set winfixheight
 " If vimscript craches, you should kill vim process.
 inoremap <C-C> <ESC>
 
-command T :bel sp | te
+inoremap <Tab> <ESC>>>A
+inoremap <S-Tab> <ESC><<A
+noremap <Tab> >>
+noremap <S-Tab> <<
+
+function! OpenTerminal()
+	bel sp
+	te
+	res 15
+endfunction
+command T call OpenTerminal()
 tnoremap <C-[> <C-\><C-n>
 tnoremap <C-w>j <C-\><C-n>:wincmd w<CR>
 tnoremap <C-w>k <C-\><C-n>:wincmd W<CR>
