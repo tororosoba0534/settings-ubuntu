@@ -200,8 +200,10 @@ nnoremap <C-w>= :horizontal wincmd =<CR>
 set equalalways
 set winfixheight
 
-" If vimscript craches, you should kill vim process.
-inoremap <C-C> <ESC>
+" DO NOT get rid of <C-C> as process-killer.
+noremap <C-g> <ESC>
+noremap! <C-g> <ESC>
+tnoremap <C-g> <C-\><C-n>
 
 inoremap <Tab> <ESC>>>A
 inoremap <S-Tab> <ESC><<A
@@ -214,7 +216,7 @@ function! OpenTerminal()
 	res 15
 endfunction
 command T call OpenTerminal()
-tnoremap <C-[> <C-\><C-n>
+" tnoremap <C-[> <C-\><C-n>
 tnoremap <C-w>j <C-\><C-n>:wincmd w<CR>
 tnoremap <C-w>k <C-\><C-n>:wincmd W<CR>
 augroup terminal
