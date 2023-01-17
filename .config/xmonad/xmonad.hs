@@ -240,7 +240,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- myLayout =  avoidStruts (multiCol [1] 1 0.01 (-0.5) ||| Tall 1 0 0.4 ||| Full)
 -- myLayout =  avoidStruts (ThreeCol 1 0 0.5 ||| spiral (1/2) ||| Accordion ||| Full)
 -- myLayout =  avoidStruts (ThreeCol 1 0 0.5 ||| Mag.magnifier' (Tall 1 0 0.8) ||| Full)
-myLayout =  avoidStruts (multiCol [1] 2 0.01 (-0.5) ||| Mag.magnifier' (Tall 1 0 0.8) ||| Full)
+myLayout =  avoidStruts (multiCol [1] 1 0.01 0.4 ||| Mag.magnifier' (Tall 1 0 0.8) ||| Full)
 -- myLayout =  avoidStruts (ThreeCol 1 0 0.5 ||| spiral (1/2) |||  (Tall 1 0 0.8) ||| Full)
 
 ------------------------------------------------------------------------
@@ -261,7 +261,7 @@ myWsFirefox = "firefox"
 myWsObs = "obs"
 myWsOpenshot = "videoedit"
 myGimp = "gimp"
-myWorkspaces    = [myWsHome, myWsFiles, myPdf, myWsFirefox, myWsObs, myWsOpenshot, myGimp, myWsZoom]
+myWorkspaces    = [myWsHome, "mid1", myWsFiles, "mid2", myPdf, "mid3", myWsFirefox, "mid4", myWsObs, "mid5", myWsOpenshot, "mid6", myGimp, "mid7", myWsZoom]
 -- Window rules:
 
 -- Execute arbitrary actions and WindowSet manipulations when managing
@@ -279,7 +279,7 @@ myWorkspaces    = [myWsHome, myWsFiles, myPdf, myWsFirefox, myWsObs, myWsOpensho
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Org.gnome.Nautilus" --> doShift myWsFiles
-    , className =? "Zathura" --> doShift myPdf
+    -- , className =? "Zathura" --> doShift myPdf
     , className =? "zoom" --> doShift myWsZoom
     , className =? "obs" --> doShift myWsObs
     , className =? "openshot" --> doShift myWsOpenshot
