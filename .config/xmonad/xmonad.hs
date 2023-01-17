@@ -88,8 +88,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_space), spawn "~/settings-ubuntu/executables/toggle_alacritty_opacity")
 
     , ((modm, xK_b), allNamedScratchpadAction myScratchPads "browser")
-    -- , ((modm, xK_e), allNamedScratchpadAction myScratchPads "filemanager")
-    , ((modm, xK_e), spawn "nautilus")
+    , ((modm, xK_e), allNamedScratchpadAction myScratchPads "filemanager")
+    -- , ((modm, xK_e), spawn "nautilus")
      
 
     -- launch dmenu
