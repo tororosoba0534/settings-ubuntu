@@ -20,7 +20,7 @@ Plug 'folke/trouble.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'nvim-tree/nvim-tree.lua'
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 Plug 'lervag/vimtex'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
@@ -119,6 +119,7 @@ nnoremap <A-e>C :Files ~/settings-ubuntu/.config/<CR>
 nnoremap <A-e>D :Files ~/Dropbox/<CR>
 nnoremap <A-e>N :Files ~/Dropbox/notetaking/<CR>
 nnoremap <A-e>A :Files ~/Dropbox/articles/<CR>
+nnoremap <A-e>R :Files ~/Dropbox/articles/reports/<CR>
 nnoremap <A-e>P :Files ~/Documents/practice/<CR>
 let g:fzf_action = {'/': 'below vsplit', '-': 'below split'}
 augroup fzf
@@ -133,6 +134,7 @@ nnoremap <A-e>c :NvimTreeClose \| NvimTreeOpen ~/settings-ubuntu/.config/<CR>
 nnoremap <A-e>d :NvimTreeClose \| NvimTreeOpen ~/Dropbox/<CR>
 nnoremap <A-e>n :NvimTreeClose \| NvimTreeOpen ~/Dropbox/notetaking/<CR>
 nnoremap <A-e>a :NvimTreeClose \| NvimTreeOpen ~/Dropbox/articles/<CR>
+nnoremap <A-e>r :NvimTreeClose \| NvimTreeOpen ~/Dropbox/articles/reports/<CR>
 nnoremap <A-e>p :NvimTreeClose \| NvimTreeOpen ~/Documents/practice/<CR>
 augroup NvimTree
 	autocmd!
@@ -184,6 +186,7 @@ nnoremap <A-m> :bel vert Man<SPACE>
 nnoremap <C-w>/ :below vsplit<CR>
 nnoremap <C-w>- :below split<CR>
 nnoremap <C-w>c :close<CR>
+nnoremap <C-w>D :bn \| bd#<CR>
 nnoremap <C-w>j :wincmd w<CR>
 nnoremap <C-w>k :wincmd W<CR>
 nnoremap <C-w>h :bprev<CR>
