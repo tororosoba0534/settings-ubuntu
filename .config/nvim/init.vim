@@ -203,7 +203,6 @@ set winfixheight
 " DO NOT get rid of <C-C> as process-killer.
 noremap <C-g> <ESC>
 noremap! <C-g> <ESC>
-tnoremap <C-g> <C-\><C-n>
 
 inoremap <Tab> <ESC>>>A
 inoremap <S-Tab> <ESC><<A
