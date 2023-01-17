@@ -24,6 +24,7 @@ import XMonad.Layout.Spiral
 import XMonad.Layout.Magnifier as Mag
 import XMonad.Layout.Minimize
 import XMonad.Layout.MultiColumns
+import XMonad.Layout.Renamed
 -- import XMonad.Layout.ResizableThreeColumns
 import qualified XMonad.Layout.BoringWindows as BW
 import XMonad.Prompt
@@ -240,7 +241,11 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- myLayout =  avoidStruts (multiCol [1] 1 0.01 (-0.5) ||| Tall 1 0 0.4 ||| Full)
 -- myLayout =  avoidStruts (ThreeCol 1 0 0.5 ||| spiral (1/2) ||| Accordion ||| Full)
 -- myLayout =  avoidStruts (ThreeCol 1 0 0.5 ||| Mag.magnifier' (Tall 1 0 0.8) ||| Full)
-myLayout =  avoidStruts (multiCol [1] 1 0.01 0.4 ||| Mag.magnifier' (Tall 1 0 0.8) ||| Full)
+-- myLayout =  avoidStruts (multiCol [1] 1 0.01 0.4 ||| Mag.magnifier' (Tall 1 0 0.8) ||| Full)
+myLayout =  avoidStruts (cols ||| semiFull ||| Full)
+  where
+    cols = renamed [Replace "Cols"] $ multiCol [1] 1 0.01 0.4
+    semiFull = renamed [Replace "SemiFull"] $ Mag.magnifier' (Tall 1 0 0.8) 
 -- myLayout =  avoidStruts (ThreeCol 1 0 0.5 ||| spiral (1/2) |||  (Tall 1 0 0.8) ||| Full)
 
 ------------------------------------------------------------------------
