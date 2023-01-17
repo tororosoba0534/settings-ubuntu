@@ -43,6 +43,10 @@ snippet \sse "subsection" b
 \subsection{$1}
 endsnippet
 
+snippet \ssse "subsubsection" b
+\subsubsection{$1}
+endsnippet
+
 
 snippet \ref "ref" i
 \ref{${1:label-name}}
@@ -81,6 +85,18 @@ snippet \table "begin table" b
 \end{table}
 endsnippet
 
+snippet \figure "begin figure" b
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=5cm]{$1}
+	\caption{$2}
+	\label{fig:$3}
+\end{figure}
+endsnippet
+
+snippet \ce "chemical expression" i
+\ce{$0}
+endsnippet
 
 
 
