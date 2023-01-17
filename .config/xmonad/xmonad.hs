@@ -20,6 +20,7 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Accordion
+import XMonad.Layout.GridVariants
 import XMonad.Layout.Spiral
 import XMonad.Layout.Magnifier as Mag
 import XMonad.Layout.Minimize
@@ -242,10 +243,10 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- myLayout =  avoidStruts (ThreeCol 1 0 0.5 ||| spiral (1/2) ||| Accordion ||| Full)
 -- myLayout =  avoidStruts (ThreeCol 1 0 0.5 ||| Mag.magnifier' (Tall 1 0 0.8) ||| Full)
 -- myLayout =  avoidStruts (multiCol [1] 1 0.01 0.4 ||| Mag.magnifier' (Tall 1 0 0.8) ||| Full)
-myLayout =  avoidStruts (cols ||| semiFull ||| Full)
+myLayout =  avoidStruts ( semiFullTwo ||| semiFullOne ||| Full)
   where
-    cols = renamed [Replace "Cols"] $ multiCol [1] 1 0.01 0.4
-    semiFull = renamed [Replace "SemiFull"] $ Mag.magnifier' (Tall 1 0 0.8) 
+    semiFullTwo = renamed [Replace "Dual"] $ TallGrid 1 2 (2/3) (16/10) (5/100)
+    semiFullOne = renamed [Replace "Single"] $ Mag.magnifier' (Tall 1 0 0.8) 
 -- myLayout =  avoidStruts (ThreeCol 1 0 0.5 ||| spiral (1/2) |||  (Tall 1 0 0.8) ||| Full)
 
 ------------------------------------------------------------------------
