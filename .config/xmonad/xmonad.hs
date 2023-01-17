@@ -278,7 +278,7 @@ myWorkspaces    = [myWsHome, "mid1", myWsFiles, "mid2", myPdf, "mid3", myWsFiref
 --
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
-    , className =? "Org.gnome.Nautilus" --> doShift myWsFiles
+    -- , className =? "Org.gnome.Nautilus" --> doShift myWsFiles
     -- , className =? "Zathura" --> doShift myPdf
     , className =? "zoom" --> doShift myWsZoom
     , className =? "obs" --> doShift myWsObs
@@ -381,9 +381,10 @@ main = do
         layoutHook         = myLayout,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
-        logHook            = dynamicLogWithPP $ xmobarPP {
+        logHook            = dynamicLogWithPP . filterOutWsPP [scratchpadWorkspaceTag] $ xmobarPP {
             ppOutput = hPutStrLn xmproc,
-            ppOrder  = \(ws:l:_) -> [ws,l]
+            -- ppOrder  = \(ws:l:_) -> [ws,l]
+            ppOrder  = \(ws:l:_) -> [l,ws]
         },
         startupHook        = myStartupHook
     }
