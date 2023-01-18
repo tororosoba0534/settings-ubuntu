@@ -20,7 +20,7 @@ Plug 'folke/trouble.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'nvim-tree/nvim-tree.lua'
-" Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki'
 Plug 'lervag/vimtex'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
@@ -56,7 +56,7 @@ syntax enable
 set completeopt=menu,menuone,noselect
 set termguicolors
 set pumblend=10
-set scrolloff=5
+set scrolloff=10
 set wrap
 set showbreak=>>>
 set breakindent
@@ -144,6 +144,9 @@ augroup END
 
 runtime init/lsp.vim
 
+" trouble.nvim: lsp error diagnostics
+nnoremap <A-t> :TroubleToggle<CR>
+
 lua require("bufferline").setup{}
 " lua require("scrollbar").setup{}
 " lua require("hlslens").setup()
@@ -208,6 +211,9 @@ inoremap <Tab> <ESC>>>A
 inoremap <S-Tab> <ESC><<A
 noremap <Tab> >>
 noremap <S-Tab> <<
+
+nnoremap J j<C-e>
+nnoremap K k<C-y>
 
 function! OpenTerminal()
 	bel sp
