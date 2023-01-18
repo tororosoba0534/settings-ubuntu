@@ -25,10 +25,10 @@ Config { font = "xft:Ubuntu Mono:pixelsize=20:antialias=true:hinting=true"
                     , Run Volume "default" "Master" ["-t", "Vol: <volume>%"] 5 
                     , Run Date "%a %b %_d %Y <fc=#ee9a00>%H:%M:%S</fc>" "date" 10
                     , Run Battery ["-t", "<acstatus>: <left>%"] 100
-		    , Run StdinReader
+		    , Run XMonadLog
                     ]
        , sepChar = "%"
        , alignSep = "}{"
        , template = "%cpu% | %memory% | %wlp3s0wi% %dynnetwork% | %battery% }\
-                    \{ %StdinReader% | %date% | %default:Master%"
+                    \{ %XMonadLog% | %date% | %default:Master%"
        }

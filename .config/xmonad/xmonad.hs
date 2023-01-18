@@ -15,11 +15,13 @@ import XMonad.Actions.Minimize
 import XMonad.Actions.RotSlaves
 import XMonad.Actions.CycleWS
 import XMonad.Actions.Submap
-import XMonad.Hooks.DynamicLog
+import XMonad.Actions.WorkspaceNames
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.StatusBar
+import XMonad.Hooks.StatusBar.PP
 import XMonad.Layout.Accordion
 import XMonad.Layout.GridVariants
 import XMonad.Layout.Spiral
@@ -147,14 +149,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --   autoComplete = Just 100000
     -- }))
 
-    , ((modm .|. shiftMask, xK_s), submap . M.fromList $
+    , ((modm , xK_s), submap . M.fromList $
       [((modm .|. shiftMask, xK_s), 
       do
         runOrRaise "openshot-qt" (className =? "openshot")
         runOrRaise "obs" (className =? "obs")
         runOrRaise "nautilus" (className =? "Org.gnome.Nautilus")
         runOrRaise "firefox" (className =? "firefox")
-      ) ]
+      )
+      , ((0, xK_r), renameWorkspace def)
+      ]
     )
 
     -- -- Push window back into tiling
@@ -317,7 +321,7 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
--- myLogHook = return () -- dynamicLogWithPP $ def { ppOutput = hPutStrLn xmproc }
+myLogHook = return () -- dynamicLogWithPP $ def { ppOutput = hPutStrLn xmproc }
 
 
 ------------------------------------------------------------------------
@@ -368,9 +372,14 @@ myScratchPads = [
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
+mySB = statusBarProp "xmobar -x 0 ~/.config/xmobar/xmobar.hs" (workspaceNamesPP . filterOutWsPP [scratchpadWorkspaceTag] $ xmobarPP {
+        -- ppOutput = hPutStrLn xmproc,
+        -- ppOrder  = \(ws:l:_) -> [ws,l]
+        ppOrder  = \(ws:l:_) -> [l,ws]
+})
 main = do
-  xmproc <- spawnPipe "xmobar -x 0 ~/.config/xmobar/xmobar.hs"
-  xmonad . docks $ ewmh def {
+  -- xmproc <- spawnPipe "xmobar -x 0 ~/.config/xmobar/xmobar.hs"
+  xmonad . withSB mySB . workspaceNamesEwmh . ewmh . docks $ def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -389,11 +398,12 @@ main = do
         layoutHook         = myLayout,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
-        logHook            = dynamicLogWithPP . filterOutWsPP [scratchpadWorkspaceTag] $ xmobarPP {
-            ppOutput = hPutStrLn xmproc,
-            -- ppOrder  = \(ws:l:_) -> [ws,l]
-            ppOrder  = \(ws:l:_) -> [l,ws]
-        },
+        -- logHook            = dynamicLogWithPP . filterOutWsPP [scratchpadWorkspaceTag] $ xmobarPP {
+        --     ppOutput = hPutStrLn xmproc,
+        --     -- ppOrder  = \(ws:l:_) -> [ws,l]
+        --     ppOrder  = \(ws:l:_) -> [l,ws]
+        -- },
+        logHook = myLogHook,
         startupHook        = myStartupHook
     }
 
