@@ -17,6 +17,7 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.Submap
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Accordion
@@ -297,6 +298,7 @@ myManageHook = composeAll
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
     <+> namedScratchpadManageHook myScratchPads
+    <+> insertPosition Below Older 
 
 ------------------------------------------------------------------------
 -- Event handling
