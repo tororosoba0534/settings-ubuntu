@@ -16,6 +16,7 @@ import XMonad.Actions.RotSlaves
 import XMonad.Actions.CycleWS
 import XMonad.Actions.Submap
 import XMonad.Actions.WorkspaceNames
+import XMonad.Actions.DynamicWorkspaces (addWorkspacePrompt, removeWorkspace)
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.ManageDocks
@@ -158,6 +159,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         runOrRaise "firefox" (className =? "firefox")
       )
       , ((0, xK_r), renameWorkspace def)
+      , ((0, xK_a), addWorkspacePrompt def)
+      , ((shiftMask, xK_d), removeWorkspace)
       ]
     )
 
@@ -272,7 +275,7 @@ myWsFirefox = "firefox"
 myWsObs = "obs"
 myWsOpenshot = "videoedit"
 myGimp = "gimp"
-myWorkspaces    = [myWsHome, "mid1", myWsFiles, "mid2", myPdf, "mid3", myWsFirefox, "mid4", myWsObs, "mid5", myWsOpenshot, "mid6", myGimp, "mid7", myWsZoom]
+myWorkspaces    = ["1", "2", "3", "4", "5"]
 -- Window rules:
 
 -- Execute arbitrary actions and WindowSet manipulations when managing
