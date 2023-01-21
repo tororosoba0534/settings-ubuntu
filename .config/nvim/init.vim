@@ -215,6 +215,10 @@ noremap <S-Tab> <<
 nnoremap J j<C-e>
 nnoremap K k<C-y>
 
+" Enable display-linewise up-down.
+nnoremap <Up> gk
+nnoremap <Down> gj
+
 function! OpenTerminal()
 	bel sp
 	te
