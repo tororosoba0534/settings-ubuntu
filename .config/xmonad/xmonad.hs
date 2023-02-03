@@ -23,6 +23,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
+import XMonad.Layout
 import XMonad.Layout.Accordion
 import XMonad.Layout.GridVariants
 import XMonad.Layout.Spiral
@@ -102,6 +103,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch gmrun
     , ((modm .|. shiftMask, xK_o     ), spawn "gmrun")
+
+    , ((modm .|. shiftMask, xK_p), spawn "maim -m 10 ~/Dropbox/linux_screenshot/$(date \"+%y%m%d%H%M%S\").jpg")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
@@ -251,10 +254,11 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- myLayout =  avoidStruts (ThreeCol 1 0 0.5 ||| spiral (1/2) ||| Accordion ||| Full)
 -- myLayout =  avoidStruts (ThreeCol 1 0 0.5 ||| Mag.magnifier' (Tall 1 0 0.8) ||| Full)
 -- myLayout =  avoidStruts (multiCol [1] 1 0.01 0.4 ||| Mag.magnifier' (Tall 1 0 0.8) ||| Full)
-myLayout =  avoidStruts ( semiFullTwo ||| semiFullOne ||| Full)
-  where
-    semiFullTwo = renamed [Replace "Dual"] $ TallGrid 1 2 (2/3) (16/10) (5/100)
-    semiFullOne = renamed [Replace "Single"] $ Mag.magnifier' (Tall 1 0 0.8) 
+myLayout =  avoidStruts (multiCol [1] 1 0.01 (-0.5) ||| semiFullTwo ||| semiFullOne ||| Full)
+
+
+semiFullTwo = renamed [Replace "Dual"] $ TallGrid 1 2 (4/5) (16/10) (5/100)
+semiFullOne = renamed [Replace "Single"] $ Mag.magnifier' (Tall 1 0 0.8) 
 -- myLayout =  avoidStruts (ThreeCol 1 0 0.5 ||| spiral (1/2) |||  (Tall 1 0 0.8) ||| Full)
 
 ------------------------------------------------------------------------
@@ -275,7 +279,7 @@ myWsFirefox = "firefox"
 myWsObs = "obs"
 myWsOpenshot = "videoedit"
 myGimp = "gimp"
-myWorkspaces    = ["1", "2", "3", "4", "5"]
+myWorkspaces    = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 -- Window rules:
 
 -- Execute arbitrary actions and WindowSet manipulations when managing
@@ -305,7 +309,7 @@ myManageHook = composeAll
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
     <+> namedScratchpadManageHook myScratchPads
-    <+> insertPosition Below Older 
+    -- <+> insertPosition Below Newer 
 
 ------------------------------------------------------------------------
 -- Event handling
