@@ -1,0 +1,16 @@
+#!/bin/bash
+echo "HELLO WORLD"
+Monitor=$(xrandr | grep -w "connected" | cut -d " " -f 1)
+CurBright=$(xrandr --verbose --current | grep ^$Monitor -A 5 | tail -n 1 | rev | cut -d " " -f 1 | rev)
+echo $CurBright
+
+echo $1
+
+if [["ABC" == "ABC"]]; then
+	NewCurBright=`echo "scale=1; $CurBright + 0.1" | bc`
+	echo $NewCurBright
+elif [["$1" == "DOWN"]]; then
+	NewCurBright=`echo "scale=1; $CurBright - 0.1" | bc`
+	echo $NewCurBright
+fi
+
