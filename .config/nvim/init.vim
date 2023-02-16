@@ -17,6 +17,7 @@ Plug 'hrsh7th/cmp-omni'
 Plug 'folke/trouble.nvim'
 
 " Others
+" Plug 'vim-skk/eskk.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'nvim-tree/nvim-tree.lua'
@@ -41,15 +42,18 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 " Plug 'numToStr/Comment.nvim'
 call plug#end()
 
-
 " auto IME off
 " fcitx5-remote breaks xmodmap configuration, so please considering replacing
 " it with xkb options.
-luafile ~/settings-ubuntu/.config/nvim/init/fcitx5.lua
+" luafile ~/settings-ubuntu/.config/nvim/init/fcitx5.lua
 " source ~/settings-ubuntu/.config/nvim/init/fcitx5.vim
+source ~/settings-ubuntu/.config/nvim/init/fcitx5-skk.vim
 
 
 	
+
+" " Necessary for eskk
+" set imdisable
 
 filetype plugin indent on
 syntax enable

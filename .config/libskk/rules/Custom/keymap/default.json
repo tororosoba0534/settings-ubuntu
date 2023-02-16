@@ -19,7 +19,8 @@
             "Right": "expand-preedit",
             "Left": "shrink-preedit",
 	    "Alt_R": "set-input-mode-hiragana",
-	    "Alt_L": "set-input-mode-latin"
+	    "Alt_L": "set-input-mode-latin",
+	    "C-l": "set-input-mode-latin"
         }
     }
 }
